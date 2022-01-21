@@ -1,9 +1,9 @@
-import com.adt.ds.Stack;
+import com.adt.ds.StackChars;
 
-public class TestDS {
+public class TestStacks {
 
     public static void main(String[] args) {
-        Stack myStack = new Stack(10);
+       /* Stack myStack = new Stack(10);
         System.out.println("isEmpty : " + myStack.isEmpty());
         System.out.println("isFull : " + myStack.isFull());
         myStack.push(3);
@@ -43,9 +43,24 @@ public class TestDS {
         System.out.println("Pop : " + myStack.pop());
         System.out.println("Pop : " + myStack.pop());
         System.out.println("isEmpty : " + myStack.isEmpty());
+        */
+
+        System.out.println(revereseCharString("THIS IS UDAY"));
+
+    }
+    public static String revereseCharString(String str){
+        int stackSize =str.length();
+        StackChars sc = new StackChars(stackSize);
+        for(int i =0;i<stackSize ;i++){
+            char ch = str.charAt(i);
+            sc.push(ch);
+        }
+        String reverseString = "";
+        for(int i =0;i<stackSize ;i++){
+            char ch = sc.pop();
+            reverseString+=ch;
+        }
+    return  reverseString;
     }
 
-    public static String reverseString() {
-        return "";
-    }
 }
