@@ -1,6 +1,6 @@
 import com.adt.ds.StackChars;
 
-public class TestStacks {
+public class StacksTest {
 
     public static void main(String[] args) {
        /* Stack myStack = new Stack(10);

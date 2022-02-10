@@ -11,6 +11,18 @@ public class Stack {
         this.top = -1;
     }
 
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public boolean isFull() {
+        return maxSize - 1 == top;
+    }
+
+    public long peek() {
+        return stackArray[top];
+    }
+
     public void push(long j) {
         System.out.println("top : " + top + " : maxSize : " + maxSize);
         if (!isFull()) {
@@ -32,15 +44,4 @@ public class Stack {
         }
     }
 
-    public long peek() {
-        return stackArray[top];
-    }
-
-    public boolean isEmpty() {
-        return top == -1;
-    }
-
-    public boolean isFull() {
-        return maxSize - 1 == top;
-    }
 }
