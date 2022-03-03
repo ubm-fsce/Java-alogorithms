@@ -1,8 +1,8 @@
-package uday.dsa.linkedlist;
+package uday.datastructures.linkedlist;
 
-import uday.dsa.linkedlist.circularlinkedlist.CircularLinkedList;
-import uday.dsa.linkedlist.doublylinkedlist.DoublyLinkiedList;
-import uday.dsa.linkedlist.singlylinkedlist.SinglyLinkedList;
+import uday.datastructures.linkedlist.circularlinkedlist.CircularLinkedList;
+import uday.datastructures.linkedlist.doublylinkedlist.DoublyLinkiedList;
+import uday.datastructures.linkedlist.singlylinkedlist.SinglyLinkedList;
 
 public class LinkedListTests {
     public static void main(String[] args) {

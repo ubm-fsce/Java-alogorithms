@@ -1,4 +1,6 @@
-import uday.dsa.stack.StackChars;
+package uday.datastructures.stack;
+
+import uday.datastructures.stack.StackChars;
 
 public class StacksTest {
 

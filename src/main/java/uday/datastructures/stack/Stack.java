@@ -1,4 +1,4 @@
-package uday.dsa.stack;
+package uday.datastructures.stack;
 
 public class Stack {
     private int maxSize;

@@ -1,4 +1,4 @@
-package uday.dsa.queue;
+package uday.datastructures.queue;
 
 public class Queue {
     private int maxSize;

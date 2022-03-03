@@ -1,6 +1,6 @@
-package uday.dsa.linkedlist.circularlinkedlist;
+package uday.datastructures.linkedlist.circularlinkedlist;
 
-import uday.dsa.linkedlist.Node;
+import uday.datastructures.linkedlist.Node;
 
 public class CircularLinkedList {
 

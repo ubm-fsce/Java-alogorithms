@@ -1,4 +1,6 @@
-import uday.dsa.queue.Queue;
+package uday.datastructures.queue;
+
+import uday.datastructures.queue.Queue;
 
 public class QueuesTest {
     public static void main(String args[]) {

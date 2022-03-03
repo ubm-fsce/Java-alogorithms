@@ -1,9 +1,9 @@
-package uday.dsa.linkedlist;
+package uday.datastructures.linkedlist.doublylinkedlist;
 
 public class Node {
     int data;
     Node next = null;
-    Node previous =null;  /*This is for doubly linked list only*/
+    Node previous = null;
 
     public int getData() {
         return data;
@@ -23,5 +23,13 @@ public class Node {
 
     public void setNext(Node next) {
         this.next = next;
+    }
+
+    public Node getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Node previous) {
+        this.previous = previous;
     }
 }

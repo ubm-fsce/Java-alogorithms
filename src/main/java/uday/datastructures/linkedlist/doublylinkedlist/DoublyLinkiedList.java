@@ -1,4 +1,4 @@
-package uday.dsa.linkedlist.doublylinkedlist;
+package uday.datastructures.linkedlist.doublylinkedlist;
 
 public class DoublyLinkiedList {
     Node first = null;
