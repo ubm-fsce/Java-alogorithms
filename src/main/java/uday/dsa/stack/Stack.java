@@ -1,4 +1,4 @@
-package com.adt.ds;
+package uday.dsa.stack;
 
 public class Stack {
     private int maxSize;

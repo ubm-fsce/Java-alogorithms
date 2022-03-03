@@ -1,4 +1,4 @@
-import com.adt.ds.Queue;
+import uday.dsa.queue.Queue;
 
 public class QueuesTest {
     public static void main(String args[]) {

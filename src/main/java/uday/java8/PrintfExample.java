@@ -1,10 +1,10 @@
-package com.uday.java8;
+package uday.java8;
 
 import java.util.Scanner;
 
 public class PrintfExample {
     public static void main(String[] args) {
-      //  scanExample();
+        //  scanExample();
         System.out.printf("Hello %s!%n", "Uday");
 
     }

@@ -1,4 +1,4 @@
-package com.adt.ds;
+package uday.dsa.queue;
 
 public class Queue {
     private int maxSize;

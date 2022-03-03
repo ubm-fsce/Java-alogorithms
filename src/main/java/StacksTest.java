@@ -1,4 +1,4 @@
-import com.adt.ds.StackChars;
+import uday.dsa.stack.StackChars;
 
 public class StacksTest {
 

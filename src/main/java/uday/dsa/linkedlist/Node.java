@@ -1,8 +1,9 @@
-package com.adt.ds.linkedlist;
+package uday.dsa.linkedlist;
 
 public class Node {
     int data;
     Node next = null;
+    Node previous =null;  /*This is for doubly linked list only*/
 
     public int getData() {
         return data;

@@ -1,6 +1,6 @@
-package com.adt.ds.linkedlist.singlylinkedlist;
+package uday.dsa.linkedlist.singlylinkedlist;
 
-import com.adt.ds.linkedlist.Node;
+import uday.dsa.linkedlist.Node;
 
 public class SinglyLinkedList {
     private Node first;
