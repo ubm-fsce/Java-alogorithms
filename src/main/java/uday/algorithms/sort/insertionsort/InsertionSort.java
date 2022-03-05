@@ -12,6 +12,13 @@ public class InsertionSort {
         });
         System.out.println("}");
     }
+    private static void printArray(int[] array) {
+        System.out.print("{");
+        Arrays.stream(array).forEach(i -> {
+            System.out.print(i + ",");
+        });
+        System.out.println("}");
+    }
 
     public static int[] insertionSort(int array[]) {
         for(int i=1; i< array.length;i++ ){
@@ -22,7 +29,8 @@ public class InsertionSort {
                 j--;
             }
             array[j+1] = element;
-
+            System.out.print("i : "+i+"  | ");
+            printArray(array);
         }
 
     return array;
