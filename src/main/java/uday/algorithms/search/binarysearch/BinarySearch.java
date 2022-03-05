@@ -10,9 +10,7 @@ public class BinarySearch {
     public static int binarySearch(int[] a, int x) {
         int p = 0;
         int r = a.length - 1;
-        int iteration=0;
         while (p <= r) {
-             iteration++;
             int q = (p + r) / 2;
             if (x < a[q]) {
                 r = q - 1;

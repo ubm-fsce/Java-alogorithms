@@ -6,9 +6,12 @@ import java.util.List;
 public class SelectionSort {
     public static void main(String[] args) {
         int array[] = {13, 255, 33, 4, 5, 92, 122, 16, 19, 25, 208, 33};
-        List<Integer> sourceList = Arrays.asList(13, 255, 33, 4, 5, 92, 122, 16, 19, 25, 208, 33);
         int[] sortedArray = selectionSort(array);
-        Arrays.asList(sortedArray).stream().forEach(System.out::print);
+        System.out.print("{");
+        Arrays.stream(sortedArray).forEach(i -> {
+            System.out.print(i + ",");
+        });
+        System.out.println("}");
     }
 
 
@@ -27,4 +30,5 @@ public class SelectionSort {
         }
         return array;
     }
+
 }
