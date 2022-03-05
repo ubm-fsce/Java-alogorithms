@@ -1,4 +1,4 @@
-package uday.algorithms.binarysearch;
+package uday.algorithms.search.binarysearch;
 
 public class BinarySearch {
     public static void main(String[] args) {

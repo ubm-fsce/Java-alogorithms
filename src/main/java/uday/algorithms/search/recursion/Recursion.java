@@ -1,4 +1,4 @@
-package uday.algorithms.recursion;
+package uday.algorithms.search.recursion;
 
 public class Recursion {
 

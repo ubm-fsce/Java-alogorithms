@@ -1,4 +1,4 @@
-package uday.algorithms.linearsearch;
+package uday.algorithms.search.linearsearch;
 
 public class LinearSearch {
     public static void main(String[] args) {
