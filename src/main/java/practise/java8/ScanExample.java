@@ -1,4 +1,4 @@
-package uday.java8;
+package practise.java8;
 
 import java.util.Scanner;
 
