@@ -1,6 +1,6 @@
-package datastructures.singlylinkedlist;
+package datastructures.lists.singlylinkedlist;
 
-import datastructures.linkedlist.Node;
+import datastructures.lists.linkedlist.Node;
 
 public class SinglyLinkedList {
     private Node first;

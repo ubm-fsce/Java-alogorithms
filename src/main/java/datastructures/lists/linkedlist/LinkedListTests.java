@@ -1,8 +1,8 @@
-package datastructures.linkedlist;
+package datastructures.lists.linkedlist;
 
-import datastructures.circularlinkedlist.CircularLinkedList;
-import datastructures.doublylinkedlist.DoublyLinkiedList;
-import datastructures.singlylinkedlist.SinglyLinkedList;
+import datastructures.lists.circularlinkedlist.CircularLinkedList;
+import datastructures.lists.doublylinkedlist.DoublyLinkiedList;
+import datastructures.lists.singlylinkedlist.SinglyLinkedList;
 
 public class LinkedListTests {
     public static void main(String[] args) {

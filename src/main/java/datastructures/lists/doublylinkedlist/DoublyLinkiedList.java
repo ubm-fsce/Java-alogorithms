@@ -1,4 +1,4 @@
-package datastructures.doublylinkedlist;
+package datastructures.lists.doublylinkedlist;
 
 public class DoublyLinkiedList {
     Node first = null;
