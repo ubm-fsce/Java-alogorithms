@@ -1,4 +1,4 @@
-package datastructures.java8;
+package uday.java8;
 
 
 import org.apache.commons.lang3.StringUtils;
