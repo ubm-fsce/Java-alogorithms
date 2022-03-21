@@ -111,7 +111,7 @@ class DecodeString {
     }
 
     int index = 0;
-
+ // String inputString = "3[ad2[ef]]6[gh]";
     String decodeStringRecursion(String s) {
         StringBuilder result = new StringBuilder();
         while (index < s.length() && s.charAt(index) != ']') {
