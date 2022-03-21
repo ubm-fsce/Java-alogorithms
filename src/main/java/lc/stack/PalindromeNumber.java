@@ -1,4 +1,4 @@
-package lc.day2.palindromenumber;
+package lc.stack;
 
 public class PalindromeNumber {
 

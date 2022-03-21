@@ -1,4 +1,4 @@
-package lc.day3.longestcommonprefix;
+package lc.stack;
 
 public class LongestCommonPrefix {
 

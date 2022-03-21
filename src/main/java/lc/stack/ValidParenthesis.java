@@ -1,4 +1,4 @@
-package lc.day4.validparenthesis;
+package lc.stack;
 
 import java.util.HashMap;
 import java.util.Stack;

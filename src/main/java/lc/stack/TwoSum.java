@@ -1,4 +1,4 @@
-package lc.day1.twosum;
+package lc.stack;
 
 import java.util.Arrays;
 import java.util.HashMap;
