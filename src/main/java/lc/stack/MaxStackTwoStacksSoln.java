@@ -13,6 +13,7 @@ import java.util.Stack;
 */
 public class MaxStackTwoStacksSoln {
 
+
     Stack<Integer> stack;
     Stack<Integer> maxStack;
 
@@ -43,25 +44,29 @@ public class MaxStackTwoStacksSoln {
     public int popMax() {
         int max = peekMax();
         Stack<Integer> buffer = new Stack();
-        while (top() != max) buffer.push(pop());
+        while (top() != max) {
+            buffer.push(pop());
+        }
         pop();
-        while (!buffer.isEmpty()) push(buffer.pop());
+        while (!buffer.isEmpty()){
+            push(buffer.pop());
+        }
         return max;
     }
 
     public static void main(String[] args) {
         MaxStackTwoStacksSoln maxStack = new MaxStackTwoStacksSoln();
-        System.out.println(" POPMAX : " + maxStack.popMax());
+       // System.out.println(" POPMAX : " + maxStack.popMax());
         maxStack.push(29);
         System.out.println(" PEEKMAX : " + maxStack.peekMax());
-        maxStack.push(29);
-        // maxStack.push(5);
-        // System.out.println(" TOP : "+maxStack.top());
+        maxStack.push(20);
+         maxStack.push(5);
+         System.out.println(" TOP : "+maxStack.top());
         System.out.println(" POPMAX : " + maxStack.popMax());
-        //System.out.println(" TOP : "+maxStack.top());
+        System.out.println(" TOP : "+maxStack.top());
         System.out.println(" PEEKMAX : " + maxStack.peekMax());
-        //System.out.println(" POP : "+maxStack.pop());
-        //System.out.println(" TOP : "+maxStack.top());
+        System.out.println(" POP : "+maxStack.pop());
+        System.out.println(" TOP : "+maxStack.top());
     }
 
 }
