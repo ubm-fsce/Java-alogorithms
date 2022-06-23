@@ -2,6 +2,15 @@ package nk.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Vector;
+
+// Represents a node of an n-ary tree
+class Node {
+
+    int key;
+    Vector<Node> child;
+
+};
 
 class BinaryTreeNode {
 
@@ -17,6 +26,32 @@ class BinaryTreeNode {
 
 public class BinaryTreePractise {
 
+    // Utility function to create a new tree node
+    Node newNode(int key) {
+        Node temp = new Node();
+        temp.key = key;
+        temp.child = new Vector<>();
+        return temp;
+    }
+
+    public void testNonBinaryTreeSum() {
+        // Creating a generic tree
+        Node root = newNode(20);
+        (root.child).add(newNode(2));
+        (root.child).add(newNode(34));
+        (root.child).add(newNode(50));
+        (root.child).add(newNode(60));
+        (root.child).add(newNode(70));
+        (root.child.get(0).child).add(newNode(15));
+        (root.child.get(0).child).add(newNode(20));
+        (root.child.get(1).child).add(newNode(30));
+        (root.child.get(2).child).add(newNode(40));
+        (root.child.get(2).child).add(newNode(100));
+        (root.child.get(2).child).add(newNode(20));
+        (root.child.get(0).child.get(1).child).add(newNode(25));
+        (root.child.get(0).child.get(1).child).add(newNode(50));
+    }
+
     public static void main(String[] args) {
         BinaryTreePractise btp = new BinaryTreePractise();
         BinaryTreeNode root = new BinaryTreeNode(1);
@@ -25,7 +60,12 @@ public class BinaryTreePractise {
         root.left.left = new BinaryTreeNode(4);
         root.left.right = new BinaryTreeNode(5);
         root.left.left.left = new BinaryTreeNode(6);
-        System.out.println(btp.sizeOfBianryTreeNonRecursive(root));
+        root.left.left.right = new BinaryTreeNode(7);
+        root.left.right.left = new BinaryTreeNode(8);
+        root.left.right.right = new BinaryTreeNode(9);
+        root.right.right = new BinaryTreeNode(11);
+        root.right.right.right = new BinaryTreeNode(18);
+        System.out.println("printAnscestors : " + btp.printAnscestors(root, root.left.right.right));
     }
 
     /*
@@ -194,10 +234,64 @@ TODO:  7) Find the size of a binaryTree without recursion
     /*
        TODO:  9) Delete Binary Tree
 */
-    public void deleteOfBianryTree(BinaryTreeNode root) {
-        root = null;
+    public void printReverseBianryTree(BinaryTreeNode root) {
+        if (root != null) {
+            printReverseBianryTree(root.left);
+            printReverseBianryTree(root.right);
+            System.out.println(root.data);
+        }
     }
 
+    /*
+      TODO:  20) Diameter of tree
+*/
+    public int diameterTree(BinaryTreeNode root) {
+        if (root == null) return 0;
+        int left, right, diameter = 0;
+        left = diameterTree(root.left);
+        right = diameterTree(root.right);
+        if (left + right > diameter)
+            diameter = left + right;
+        return Math.max(left, right + 1);
+    }
+
+    /*
+   TODO:  32) Print all ancestors
+*/
+    public boolean printAnscestors(BinaryTreeNode root, BinaryTreeNode node) {
+        if (root == null) return false;
+        if (root.right == node || root.left == node || printAnscestors(root.left, node) || printAnscestors(root.right, node)) {
+            System.out.println(root.data);
+            return true;
+        }
+        return false;
+    }
+
+    public int sumNodesNonRecursive(Node root) {
+        // initialize the sum variable
+        int sum = 0;
+        if (root == null)
+            return 0;
+        // Creating a queue and pushing the root
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            int n = q.size();
+            // If this node has children
+            while (n > 0) {
+                // Dequeue an item from queue and
+                // add it to variable "sum"
+                Node p = q.peek();
+                q.remove();
+                sum += p.key;
+                // Enqueue all children of the dequeued item
+                for (int i = 0; i < p.child.size(); i++)
+                    q.add(p.child.get(i));
+                n--;
+            }
+        }
+        return sum;
+    }
 
 }
 
