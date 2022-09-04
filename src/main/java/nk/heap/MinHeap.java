@@ -46,7 +46,7 @@ public class MinHeap {
         capacity = cap;
         harr = new int[cap];
     }
-
+    
     // Inserts a new key 'k'
     void insertKey(int k) {
         if (heap_size == capacity) {

@@ -1,7 +1,7 @@
 package algorithms.binarysearchtree;
 
 public class Node {
-    int key;
+   public  int key;
     String value;
     Node leftChild, RightChild;
 
