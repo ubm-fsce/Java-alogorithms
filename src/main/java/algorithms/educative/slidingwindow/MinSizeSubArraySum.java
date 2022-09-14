@@ -1,2 +1,5 @@
-package algorithms.educative.slidingwindow;public class Test {
+package algorithms.educative.slidingwindow;
+
+public class MinSizeSubArraySum {
+
 }
