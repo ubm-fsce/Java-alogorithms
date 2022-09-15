@@ -227,7 +227,107 @@ public class BinaryTreeTraversals {
     }
     // TODO : UDAY == >iterative Approach diameterOfBinaryTreeIterative <==
 
+    // ############################ Maximum Path sum of a binary tree
+
+    static int maxPathSumRecursive(Node root, int[] maxPathSum) {
+        if (root == null)
+            return 0;
+        int lsum = Math.max(Integer.MIN_VALUE, maxPathSumRecursive(root.left, maxPathSum));
+        int rSum = Math.max(Integer.MIN_VALUE, maxPathSumRecursive(root.right, maxPathSum));
+        maxPathSum[0] = Math.max(maxPathSum[0], (root.data + lsum + rSum));
+        return Math.max(lsum, rSum) + root.data;
+    }
+
+    public static int maxPathSum(Node root) {
+        int maxpathsumArray[] = { Integer.MIN_VALUE };
+        maxPathSumRecursive(root, maxpathsumArray);
+        return maxpathsumArray[0];
+    }
+
+    // ############################ Check if two trees are identical
+    // https://leetcode.com/problems/same-tree/solution/
+    static boolean isIdenticalTreesIterative(Node root1, Node root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (root1 == null || root2 == null)
+            return false;
+        Queue<Node> q1 = new LinkedList<>();
+        Queue<Node> q2 = new LinkedList<>();
+        q1.offer(root1);
+        q2.offer(root2);
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            Node r1n = null, r2n = null;
+            if (!q1.isEmpty())
+                r1n = q1.poll();
+            if (!q2.isEmpty())
+                r2n = q2.poll();
+            if (r1n == null || r2n == null || r1n.data != r2n.data)
+                return false;
+            if (r1n != null && r1n.left != null)
+                q1.offer(r1n.left);
+            if (r1n != null && r1n.right != null)
+                q1.offer(r1n.right);
+            if (r2n != null && r2n.left != null)
+                q2.offer(r2n.left);
+            if (r2n != null && r2n.right != null)
+                q2.offer(r2n.right);
+
+        }
+        return true;
+    }
+
+    static boolean isIdenticalTreesRecursive(Node root1, Node root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (root1 == null || root2 == null)
+            return false;
+        return isIdenticalTreesRecursive(root1.left, root2.left) &&
+                isIdenticalTreesRecursive(root1.right, root2.right) && root1.data == root2.data;
+    }
+
+    // ############################ Plumbing Code
     public static void main(String args[]) {
+
+        // Node root = getTree();
+        Node root1 = new Node(1);
+        root1.left = new Node(2);
+
+        Node root2 = new Node(1);
+        root1.right = new Node(2);
+
+        ArrayList<Integer> inOrder;
+        /*
+         * inOrder = inOrderIterativeTraversal(root);
+         * printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
+         * inOrderRecursiveTraversal(root, inOrder);
+         * printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
+         * preOrderIterativeTraversal(root);
+         * printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
+         * preOrderRecursiveTraversal(root, inOrder);
+         * printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
+         * postOrderRecursiveTraversal(root, inOrder);
+         * printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
+         * postOrderTwoStackTraversal(root);
+         * printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
+         * System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
+         * System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
+         */
+        System.out.println("isIdenticalTreesIterative ? ::==> " + isIdenticalTreesIterative(root1, root2));
+        // System.out.println("isIdenticalTreesRecursive ? ::==> " +
+        // isIdenticalTreesRecursive(root, getTree()));
+
+    }
+
+    private static void printBinaryTree(ArrayList<Integer> inOrder, String... name) {
+        System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ":  BEGIN");
+        for (int i = 0; i < inOrder.size(); i++) {
+            System.out.print(inOrder.get(i) + " ");
+        }
+        System.out.println("");
+        System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ": END ");
+    }
+
+    static Node getTree() {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
@@ -238,29 +338,7 @@ public class BinaryTreeTraversals {
         root.right.right = new Node(7);
         root.right.right.left = new Node(9);
         root.right.right.right = new Node(10);
-        ArrayList<Integer> inOrder;
-        inOrder = inOrderIterativeTraversal(root);
-        printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
-        inOrderRecursiveTraversal(root, inOrder);
-        printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
-        preOrderIterativeTraversal(root);
-        printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
-        preOrderRecursiveTraversal(root, inOrder);
-        printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
-        postOrderRecursiveTraversal(root, inOrder);
-        printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
-        postOrderTwoStackTraversal(root);
-        printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
-        System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
-    }
-
-    private static void printBinaryTree(ArrayList<Integer> inOrder, String... name) {
-        System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ":  BEGIN");
-        for (int i = 0; i < inOrder.size(); i++) {
-            System.out.print(inOrder.get(i) + " ");
-        }
-        System.out.println("");
-        System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ": END ");
+        return root;
     }
 
 }
