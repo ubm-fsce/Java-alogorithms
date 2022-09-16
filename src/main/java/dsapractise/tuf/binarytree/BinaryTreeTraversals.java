@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
+import javax.management.Query;
+
 class Node {
 
     int data;
@@ -245,33 +247,52 @@ public class BinaryTreeTraversals {
     }
 
     // ############################ Check if two trees are identical
-    // https://leetcode.com/problems/same-tree/solution/
-    static boolean isIdenticalTreesIterative(Node root1, Node root2) {
+
+    static boolean check(Node root1, Node root2) {
         if (root1 == null && root2 == null)
             return true;
         if (root1 == null || root2 == null)
             return false;
+        if (root1.data != root2.data)
+            return false;
+
+        return true;
+    }
+
+    // https://leetcode.com/problems/same-tree/solution/
+    static boolean isIdenticalTreesIterative(Node root1, Node root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (!check(root1, root2))
+            return false;
+
         Queue<Node> q1 = new LinkedList<>();
         Queue<Node> q2 = new LinkedList<>();
         q1.offer(root1);
         q2.offer(root2);
-        while (!q1.isEmpty() || !q2.isEmpty()) {
+        while (!q1.isEmpty()) {
             Node r1n = null, r2n = null;
-            if (!q1.isEmpty())
-                r1n = q1.poll();
-            if (!q2.isEmpty())
-                r2n = q2.poll();
-            if (r1n == null || r2n == null || r1n.data != r2n.data)
-                return false;
-            if (r1n != null && r1n.left != null)
-                q1.offer(r1n.left);
-            if (r1n != null && r1n.right != null)
-                q1.offer(r1n.right);
-            if (r2n != null && r2n.left != null)
-                q2.offer(r2n.left);
-            if (r2n != null && r2n.right != null)
-                q2.offer(r2n.right);
+            r1n = q1.poll();
+            r2n = q2.poll();
 
+            if (!check(r1n, r2n))
+                return false;
+            if (!check(r1n.left, r2n.left))
+                return false;
+            if (r1n != null) {
+                if (r1n.left != null) {
+                    q1.offer(r1n.left);
+                    q2.offer(r2n.left);
+
+                }
+                if (!check(r1n.right, r2n.right))
+                    return false;
+                if (r1n.right != null) {
+                    q1.offer(r1n.right);
+                    q2.offer(r2n.right);
+
+                }
+            }
         }
         return true;
     }
@@ -283,6 +304,36 @@ public class BinaryTreeTraversals {
             return false;
         return isIdenticalTreesRecursive(root1.left, root2.left) &&
                 isIdenticalTreesRecursive(root1.right, root2.right) && root1.data == root2.data;
+    }
+
+    // ############################ ZIGZAG Traversal
+
+    public static List<List<Integer>> zigzagLevelOrder(Node root) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if (root == null)
+            return result;
+        Queue<Node> q = new LinkedList();
+        q.offer(root);
+        boolean flip = false;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            List<Integer> sublist = new ArrayList<Integer>();
+            for (int i = 0; i < size; i++) {
+                if (q.peek().left != null)
+                    q.offer(q.peek().left);
+                if (q.peek().right != null)
+                    q.offer(q.peek().right);
+                if (flip == true)
+                    sublist.add(q.poll().data);
+                else
+                    sublist.add(0, q.poll().data);
+
+            }
+            flip = !flip;
+            result.add(sublist);
+        }
+        return result;
+
     }
 
     // ############################ Plumbing Code
@@ -312,9 +363,11 @@ public class BinaryTreeTraversals {
          * System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
          * System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
          */
-        System.out.println("isIdenticalTreesIterative ? ::==> " + isIdenticalTreesIterative(root1, root2));
+        // System.out.println("isIdenticalTreesIterative ? ::==> " +
+        // isIdenticalTreesIterative(root1, root2));
         // System.out.println("isIdenticalTreesRecursive ? ::==> " +
         // isIdenticalTreesRecursive(root, getTree()));
+        System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root1));
 
     }
 
