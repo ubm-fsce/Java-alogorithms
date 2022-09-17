@@ -1,10 +1,13 @@
 package dsapractise.tuf.binarytree;
 
+import java.lang.annotation.Retention;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import javax.management.Query;
 
@@ -336,39 +339,91 @@ public class BinaryTreeTraversals {
 
     }
 
+    // ############################ Vertical Orde Traversal
+    class Tuple {
+        Node node;
+        int row;
+        int column;
+
+        public Tuple(Node n, int r, int c) {
+            this.node = n;
+            this.row = r;
+            this.column = c;
+        }
+    }
+
+    List<List<Integer>> verticalOrderTraversalIterative(Node root) {
+        TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap = new TreeMap<>();
+        Queue<Tuple> q = new LinkedList<Tuple>();
+        q.offer(new Tuple(root, 0, 0));
+        while (!q.isEmpty()) {
+            Tuple t = q.poll();
+            Node node = t.node;
+            int r = t.row;
+            int c = t.column;
+            if (!treemap.containsKey(r)) {
+                treemap.put(r, new TreeMap());
+            }
+            if (!treemap.get(r).containsKey(c)) {
+                treemap.get(r).put(c, new PriorityQueue<Integer>());
+            }
+            treemap.get(r).get(c).offer(node.data);
+            if (node.left != null) {
+                q.offer(new Tuple(node.left, r - 1, c + 1));
+            }
+            if (node.right != null) {
+                q.offer(new Tuple(node.right, r + 1, c + 1));
+
+            }
+        }
+
+        List<List<Integer>> list = new ArrayList<>();
+        for (TreeMap<Integer, PriorityQueue<Integer>> ys : treemap.values()) {
+            list.add(new ArrayList<Integer>());
+            for (PriorityQueue<Integer> nodes : ys.values()) {
+                while (!nodes.isEmpty()) {
+                    list.get(list.size() - 1).add(nodes.poll());
+
+                }
+
+            }
+        }
+        return list;
+    }
+
     // ############################ Plumbing Code
     public static void main(String args[]) {
 
-        // Node root = getTree();
+        Node root = getTree();
         Node root1 = new Node(1);
         root1.left = new Node(2);
-
         Node root2 = new Node(1);
         root1.right = new Node(2);
-
         ArrayList<Integer> inOrder;
-        /*
-         * inOrder = inOrderIterativeTraversal(root);
-         * printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
-         * inOrderRecursiveTraversal(root, inOrder);
-         * printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
-         * preOrderIterativeTraversal(root);
-         * printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
-         * preOrderRecursiveTraversal(root, inOrder);
-         * printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
-         * postOrderRecursiveTraversal(root, inOrder);
-         * printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
-         * postOrderTwoStackTraversal(root);
-         * printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
-         * System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
-         * System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
-         */
-        // System.out.println("isIdenticalTreesIterative ? ::==> " +
-        // isIdenticalTreesIterative(root1, root2));
-        // System.out.println("isIdenticalTreesRecursive ? ::==> " +
-        // isIdenticalTreesRecursive(root, getTree()));
-        System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root1));
+        inOrder = inOrderIterativeTraversal(root);
+        printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
+        inOrderRecursiveTraversal(root, inOrder);
+        printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
+        preOrderIterativeTraversal(root);
+        printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
+        preOrderRecursiveTraversal(root, inOrder);
+        printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
+        postOrderRecursiveTraversal(root, inOrder);
+        printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
+        postOrderTwoStackTraversal(root);
+        printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
+        System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
+        System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
 
+        System.out.println("isIdenticalTreesIterative ? ::==> " +
+                isIdenticalTreesIterative(root1, root2));
+        System.out.println("isIdenticalTreesRecursive ? ::==> " +
+                isIdenticalTreesRecursive(root, getTree()));
+        System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
+        BinaryTreeTraversals bts = new BinaryTreeTraversals();
+
+        System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
+        System.out.println("UDAY ====>");
     }
 
     private static void printBinaryTree(ArrayList<Integer> inOrder, String... name) {
@@ -383,14 +438,14 @@ public class BinaryTreeTraversals {
     static Node getTree() {
         Node root = new Node(1);
         root.left = new Node(2);
-        root.right = new Node(3);
         root.left.left = new Node(4);
-        root.left.right = new Node(5);
-        root.left.right.left = new Node(8);
-        root.right.left = new Node(6);
-        root.right.right = new Node(7);
-        root.right.right.left = new Node(9);
-        root.right.right.right = new Node(10);
+        root.left.right = new Node(10);
+        root.left.left.right = new Node(5);
+        root.left.left.right.right = new Node(6);
+        root.right = new Node(3);
+        root.right.left = new Node(9);
+        root.right.right = new Node(10);
+
         return root;
     }
 
