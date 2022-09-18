@@ -3,10 +3,12 @@ package dsapractise.tuf.binarytree;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
+
 
 import javax.swing.tree.TreeNode;
 
@@ -132,10 +134,10 @@ public class BinaryTreeTraversals {
 
     // ############################ Three Traversals in one method
     // ############################
-    class Pair {
+    static class Pair {
 
         Node node;
-        int num;
+        Integer num;
 
         Pair(Node _node, int _num) {
             num = _num;
@@ -404,16 +406,32 @@ public class BinaryTreeTraversals {
 
     // }
     // ############################ Top Orde Traversal Iterative
-    static List<Integer> topView(TreeNode root) {
+    static List<Integer> topView(Node root) {
         ArrayList<Integer> list = new ArrayList<>();
         if (root == null)
             return list;
+        Map<Integer, Integer> map = new TreeMap<>();
         Queue<Pair> q = new LinkedList<Pair>();
         q.add(new Pair(root, 0));
-        while(!q.isEmpty()){
+        while (!q.isEmpty()) {
             Pair p = q.poll();
-            int hd = p
+            int hd = p.num;
+            Node node = p.node;
+            if (map.get(hd) == null)
+                map.put(hd, node.data);
+
+            if (node.left != null) {
+
+                q.add(new Pair(node.left, hd - 1));
+            }
+            if (node.right != null) {
+                q.add(new Pair(node.right, hd + 1));
+            }
         }
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+            list.add(entry.getValue());
+        }
+        return list;
 
     }
 
