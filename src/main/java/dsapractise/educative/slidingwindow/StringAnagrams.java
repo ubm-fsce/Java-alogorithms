@@ -6,7 +6,7 @@ public class StringAnagrams {
 
     public static List<Integer> findStringAnagrams(String str, String pattern) {
         List<Integer> resultIndices = new ArrayList<Integer>();
-        HashMap<Character, Integer> chMap = new HashMap();
+        HashMap<Character, Integer> chMap = new HashMap<>();
         for (Character ch : pattern.toCharArray()) {
             chMap.put(ch, chMap.getOrDefault(ch, 0) + 1);
         }
@@ -14,7 +14,7 @@ public class StringAnagrams {
         int len = str.length();
         int ptrLen = pattern.length();
         int matched = 0;
-        // TODO: Write your code here
+        // Write your code here
         for (int i = 0; i < len; i++) {
             Character ch = str.charAt(i);
             if (chMap.containsKey(ch)) {

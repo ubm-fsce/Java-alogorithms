@@ -1,7 +1,5 @@
 package dsapractise.tuf.recursion;
 
-import java.util.Arrays;
-
 public class Recursion {
 
     public static void main(String[] args) {

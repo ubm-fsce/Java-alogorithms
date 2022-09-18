@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-// TODO : 11.4 COMPUTE THE k CLOSEST STARS
+//  : 11.4 COMPUTE THE k CLOSEST STARS
 public class Star implements Comparable<Star> {
 
     private double x, y, z;
@@ -26,7 +26,7 @@ public class Star implements Comparable<Star> {
         return Double.compare(this.distance(), rhs.distance());
     }
 
-    // TODO : 11.4 COMPUTE THE k CLOSEST STARS
+    // : 11.4 COMPUTE THE k CLOSEST STARS
     public static List<Star> findClosestKStars(int ks, Iterator<Star> stars) {
         // (int ks, Iterator<Star> star){
         // maxHeap to store the closest k stars seen so far.

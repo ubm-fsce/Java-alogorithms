@@ -24,7 +24,7 @@ public class MergeSortedArrays {
         INCREASING, DECREASING
     }
 
-    // TODO : 11.1 Merge Sorted Arrays
+    // : 11.1 Merge Sorted Arrays
     public static List<Integer> mergeSortedArrays(
             List<List<Integer>> sortedArrays) {
         List<Iterator<Integer>> iters = new ArrayList<>(sortedArrays.size());
@@ -52,7 +52,7 @@ public class MergeSortedArrays {
         return result;
     }
 
-    // TODO : 11.2 SORT AN INCREASING-DECREASING ARRAY
+    // : 11.2 SORT AN INCREASING-DECREASING ARRAY
     public static List<Integer> sortKIncreasingDecreasingArray(List<Integer> A) {
         // Decomposes A into a set of sorted arrays.
         List<List<Integer>> sortedSubarrays = new ArrayList<>();
@@ -78,7 +78,7 @@ public class MergeSortedArrays {
         return MergeSortedArrays.mergeSortedArrays(sortedSubarrays);
     }
 
-    // TODO : 11.3 SORT AN ALMOST-SORTED ARRAY
+    // : 11.3 SORT AN ALMOST-SORTED ARRAY
     public void sortApproximatelySortedData(Iterator<Integer> sequence,
             int k) {
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();

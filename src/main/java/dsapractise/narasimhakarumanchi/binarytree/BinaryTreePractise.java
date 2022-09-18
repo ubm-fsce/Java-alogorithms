@@ -69,7 +69,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 1) Find Maximum value of an element in a binary tree with recursion
+     * : 1) Find Maximum value of an element in a binary tree with recursion
      */
     public int maxInBinaryTree(BinaryTreeNode root) {
         int maxVal = Integer.MIN_VALUE;
@@ -85,7 +85,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 2) Find Maximum value of an element in a binary tree without using
+     * : 2) Find Maximum value of an element in a binary tree without using
      * recursion
      */
     public int maxInBinaryTreeNonRecursive(BinaryTreeNode root) {
@@ -109,7 +109,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 3) Search an element in binary tree
+     * : 3) Search an element in binary tree
      */
     public boolean findElementInBinaryTree(BinaryTreeNode root, int val) {
         if (root == null)
@@ -120,7 +120,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 4) Search an element in binary tree without recursion
+     * : 4) Search an element in binary tree without recursion
      */
     public boolean findElementInBinaryTreeNoRecursion(BinaryTreeNode root, int val) {
         if (root == null)
@@ -144,7 +144,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 5a) Insert an Element into Binary Tree
+     * : 5a) Insert an Element into Binary Tree
      */
     public BinaryTreeNode insertElementInBinaryTree(BinaryTreeNode root, int val) {
         if (root == null)
@@ -171,7 +171,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 5b) Insert an Element into Binary Tree No Recursion
+     * : 5b) Insert an Element into Binary Tree No Recursion
      */
     public BinaryTreeNode insertElementInBinaryTreeNoRecursion(BinaryTreeNode root, int val) {
         if (root == null)
@@ -198,7 +198,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 6) Find the size of a binaryTree recursive
+     * : 6) Find the size of a binaryTree recursive
      */
     public int sizeOfBianryTree(BinaryTreeNode root) {
         int lCount = root.left == null ? 0 : sizeOfBianryTree(root.left);
@@ -207,7 +207,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 7) Find the size of a binaryTree without recursion
+     * : 7) Find the size of a binaryTree without recursion
      */
     public int sizeOfBianryTreeNonRecursive(BinaryTreeNode root) {
         int count = 0;
@@ -231,14 +231,14 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 8) Delete Binary Tree
+     * : 8) Delete Binary Tree
      */
     public void deleteOfBianryTree(BinaryTreeNode root) {
         root = null;
     }
 
     /*
-     * TODO: 9) Delete Binary Tree
+     * : 9) Delete Binary Tree
      */
     public void printReverseBianryTree(BinaryTreeNode root) {
         if (root != null) {
@@ -249,7 +249,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 20) Diameter of tree
+     * : 20) Diameter of tree
      */
     public int diameterTree(BinaryTreeNode root) {
         if (root == null)
@@ -263,7 +263,7 @@ public class BinaryTreePractise {
     }
 
     /*
-     * TODO: 32) Print all ancestors
+     * : 32) Print all ancestors
      */
     public boolean printAnscestors(BinaryTreeNode root, BinaryTreeNode node) {
         if (root == null)

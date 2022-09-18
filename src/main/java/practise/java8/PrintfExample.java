@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PrintfExample {
     public static void main(String[] args) {
-        //  scanExample();
+        scanExample();
         System.out.printf("Hello %s!%n", "Uday");
 
     }
@@ -15,11 +15,11 @@ public class PrintfExample {
         for (int i = 0; i < 3; i++) {
             String s1 = sc.next();
             int x = sc.nextInt();
-            //Complete this line
+            // Complete this line
             System.out.format("%-15s%03d%n", s1, x);
 
         }
+        sc.close();
         System.out.println("================================");
     }
 }
-

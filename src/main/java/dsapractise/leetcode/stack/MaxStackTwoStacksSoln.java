@@ -17,8 +17,8 @@ public class MaxStackTwoStacksSoln {
     Stack<Integer> maxStack;
 
     public MaxStackTwoStacksSoln() {
-        this.stack = new Stack();
-        this.maxStack = new Stack();
+        this.stack = new Stack<>();
+        this.maxStack = new Stack<>();
     }
 
     public void push(int x) {
@@ -42,7 +42,7 @@ public class MaxStackTwoStacksSoln {
 
     public int popMax() {
         int max = peekMax();
-        Stack<Integer> buffer = new Stack();
+        Stack<Integer> buffer = new Stack<>();
         while (top() != max) {
             buffer.push(pop());
         }

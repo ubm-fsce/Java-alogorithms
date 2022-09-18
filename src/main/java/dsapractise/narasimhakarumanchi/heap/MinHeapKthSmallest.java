@@ -54,7 +54,7 @@ public class MinHeapKthSmallest {
         if (heapArray.length == 0)
             return -1;
         int min = heapArray[0];
-        // TODO pending
+        // pending
         return -1;
     }
 

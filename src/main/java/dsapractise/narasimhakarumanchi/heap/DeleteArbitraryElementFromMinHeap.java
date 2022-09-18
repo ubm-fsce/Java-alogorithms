@@ -6,7 +6,7 @@ public class DeleteArbitraryElementFromMinHeap {
     int[] heapArray;
 
     public DeleteArbitraryElementFromMinHeap(int cap) {
-        int heapSize = 0;
+
         this.capacity = cap;
         heapArray = new int[capacity];
     }

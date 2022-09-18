@@ -7,7 +7,7 @@ import java.util.List;
 class TwoPointer {
     /*
      * public static int findLength(int[] arr, int k) {
-     * // TODO: Write your code here
+     * // : Write your code here
      * if((arr==null) || (arr.length==0)) return -1;
      * int maxLength=0, start=0;
      * int onesum=0;
@@ -59,7 +59,7 @@ class TwoPointer {
      * public static class PairWithTargetSum {
      * 
      * public int[] search(int[] arr, int targetSum) {
-     * // TODO: Write your code here
+     * // : Write your code here
      * int al = arr.length;
      * int left=0;
      * int right=arr.length-1;
@@ -80,7 +80,7 @@ class TwoPointer {
      * }
      */
     public static int remove(int[] arr) {
-        // TODO: Write your code here
+        // : Write your code here
         int nondupindex = 1;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != arr[nondupindex - 1]) {
@@ -132,7 +132,7 @@ class TwoPointer {
         List<List<Integer>> triplets = new ArrayList<>();
 
         Arrays.sort(arr);
-        // TODO: Write your code here
+        // : Write your code here
         for (int i = 0; i < arr.length - 2; i++) {
             if (i > 0 && arr[i] == arr[i - 1]) {
                 continue;
@@ -214,7 +214,7 @@ class TwoPointer {
 
     public static int searchTripletsCount(int[] arr, int target) {
         int count = 0;
-        // TODO: Write your code here
+        // : Write your code here
         Arrays.sort(arr);
 
         for (int i = 0; i < arr.length - 2; i++) {

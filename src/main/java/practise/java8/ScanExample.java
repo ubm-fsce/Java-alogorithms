@@ -11,6 +11,7 @@ public class ScanExample {
         scan.nextLine();
         String s = scan.nextLine();
         System.out.println("i : " + i + " d : " + d + "  S : " + s);
+        scan.close();
 
     }
 }

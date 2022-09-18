@@ -59,7 +59,7 @@ public class BinarySearchTreePractise {
     }
 
     /*
-     * TODO: 52) Give an algorithm for finding the shortest path between two nodes
+     * : 52) Give an algorithm for finding the shortest path between two nodes
      * in a BST
      */
     // This function make sure that a is smaller
@@ -75,7 +75,7 @@ public class BinarySearchTreePractise {
     }
 
     /*
-     * TODO: 54) Given pointers to two nodes in a binary search tree, find the
+     * : 54) Given pointers to two nodes in a binary search tree, find the
      * lowest common
      * ancestor (LCA). Assume that both values already exist in the tree.
      */
@@ -96,7 +96,7 @@ public class BinarySearchTreePractise {
     }
 
     /*
-     * TODO: 55) Approach 1 : Give an algorithm to check whether the given binary
+     * : 55) Approach 1 : Give an algorithm to check whether the given binary
      * tree is a BST or not.
      */
     boolean isBST(Node node) {
@@ -117,7 +117,7 @@ public class BinarySearchTreePractise {
     }
 
     /*
-     * TODO: 55) Approach 2 : Give an algorithm to check whether the given binary
+     * : 55) Approach 2 : Give an algorithm to check whether the given binary
      * tree is a BST or not.
      */
     // Returns true if given tree is BST.
@@ -157,7 +157,7 @@ public class BinarySearchTreePractise {
         return (isBSTUtil(node.left, min, node.key - 1) && isBSTUtil(node.right, node.key + 1, max));
     }
 
-    // TODO :59) Give an algorithm for converting BST to circular DLL with space
+    // :59) Give an algorithm for converting BST to circular DLL with space
     // complexity
     // Display Circular Link List
     public void display(Node head) {
@@ -171,7 +171,7 @@ public class BinarySearchTreePractise {
     }
 
     /*
-     * TODO :59) Give an algorithm for converting BST to circular DLL with space
+     * :59) Give an algorithm for converting BST to circular DLL with space
      * complexity
      * Method converts a tree to a circular Link List and then returns the head of
      * the Link List
@@ -201,7 +201,7 @@ public class BinarySearchTreePractise {
     }
 
     /*
-     * TODO :59) Give an algorithm for converting BST to circular DLL with space
+     * :59) Give an algorithm for converting BST to circular DLL with space
      * complexity
      * concatenate both the lists and returns the head of the List
      */
@@ -270,20 +270,20 @@ public class BinarySearchTreePractise {
          * sdbn.insert(root, 25);
          * sdbn.insert(root, 35);
          */
-        // TODO: 52) Give an algorithm for finding the shortest path between two nodes
+        // : 52) Give an algorithm for finding the shortest path between two nodes
         // in a BST
         // System.out.println(sdbn.findDistWrapper(root, 5, 35));
         /*
-         * TODO: 54) Given pointers to two nodes in a binary search tree, find the
+         * : 54) Given pointers to two nodes in a binary search tree, find the
          * lowest common
          * ancestor (LCA). Assume that both values already exist in the tree.
          */
         // System.out.println(sdbn.lca(root, 12, 13).key);
-        // TODO: 55) Give an algorithm to check whether the given binary tree is a BST
+        // : 55) Give an algorithm to check whether the given binary tree is a BST
         // or not.
         // System.out.println(sdbn.isBSTUtil(root, Integer.MIN_VALUE,
         // Integer.MAX_VALUE));
-        // TODO: 55) Approach 2 : 55) Approach 2 : Give an algorithm to check whether
+        // : 55) Approach 2 : 55) Approach 2 : Give an algorithm to check whether
         // the given binary tree is a BST or not.
         // System.out.println(sdbn.isBSTApproach2(root, null, null));
         // head refers to the head of the Link List

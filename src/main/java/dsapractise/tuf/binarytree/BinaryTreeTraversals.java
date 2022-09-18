@@ -1,6 +1,5 @@
 package dsapractise.tuf.binarytree;
 
-import java.lang.annotation.Retention;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
-
-import javax.management.Query;
 
 class Node {
 
@@ -76,10 +73,10 @@ public class BinaryTreeTraversals {
     // ############################ PRE Order Traversal ############################
 
     static ArrayList<Integer> preOrderIterativeTraversal(Node curr) {
-        ArrayList<Integer> preOrderList = new ArrayList();
+        ArrayList<Integer> preOrderList = new ArrayList<>();
         if (curr == null)
             return preOrderList;
-        Stack<Node> stack = new Stack();
+        Stack<Node> stack = new Stack<>();
         stack.push(curr);
         while (!stack.isEmpty()) {
             Node top = stack.pop();
@@ -111,11 +108,11 @@ public class BinaryTreeTraversals {
     }
 
     static ArrayList<Integer> postOrderTwoStackTraversal(Node curr) {
-        ArrayList<Integer> postOrderList = new ArrayList();
+        ArrayList<Integer> postOrderList = new ArrayList<>();
         if (curr == null)
             return postOrderList;
-        Stack<Node> s1 = new Stack();
-        Stack<Node> s2 = new Stack();
+        Stack<Node> s1 = new Stack<>();
+        Stack<Node> s2 = new Stack<>();
         s1.push(curr);
         while (!s1.isEmpty()) {
             curr = s1.pop();
@@ -218,7 +215,7 @@ public class BinaryTreeTraversals {
     static boolean isBalancedBinaryTree(Node root) {
         return dfsBalancedRecursive(root) != -1;
     }
-    // TODO : UDAY == >iterative Approach dfsHeightIterative <==
+    // : UDAY == >iterative Approach dfsHeightIterative <==
     // ############################ Diameter of a Binary Tree
     // ############################
 
@@ -230,7 +227,7 @@ public class BinaryTreeTraversals {
         diameter[0] = Math.max(lh + rh, diameter[0]);
         return 1 + Math.max(lh, rh);
     }
-    // TODO : UDAY == >iterative Approach diameterOfBinaryTreeIterative <==
+    // : UDAY == >iterative Approach diameterOfBinaryTreeIterative <==
 
     // ############################ Maximum Path sum of a binary tree
 
@@ -315,7 +312,7 @@ public class BinaryTreeTraversals {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         if (root == null)
             return result;
-        Queue<Node> q = new LinkedList();
+        Queue<Node> q = new LinkedList<>();
         q.offer(root);
         boolean flip = false;
         while (!q.isEmpty()) {
@@ -362,7 +359,7 @@ public class BinaryTreeTraversals {
             int r = t.row;
             int c = t.column;
             if (!treemap.containsKey(r)) {
-                treemap.put(r, new TreeMap());
+                treemap.put(r, new TreeMap<>());
             }
             if (!treemap.get(r).containsKey(c)) {
                 treemap.get(r).put(c, new PriorityQueue<Integer>());
@@ -383,9 +380,7 @@ public class BinaryTreeTraversals {
             for (PriorityQueue<Integer> nodes : ys.values()) {
                 while (!nodes.isEmpty()) {
                     list.get(list.size() - 1).add(nodes.poll());
-
                 }
-
             }
         }
         return list;
