@@ -8,6 +8,8 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
 
+import javax.swing.tree.TreeNode;
+
 class Node {
 
     int data;
@@ -336,7 +338,7 @@ public class BinaryTreeTraversals {
 
     }
 
-    // ############################ Vertical Orde Traversal
+    // ############################ Vertical Orde Traversal iterative
     class Tuple {
         Node node;
         int row;
@@ -384,6 +386,35 @@ public class BinaryTreeTraversals {
             }
         }
         return list;
+    }
+
+    // ############################ Vertical Orde Traversal Recursive
+    // static List<List<Integer>> verticalOrderTraversalRecursvie(Node root) {
+    // TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap = new
+    // TreeMap<>();
+    // }
+
+    // private static void dfsVerticalOrderTraversal(Node node, Integer row, Integer
+    // col,
+    // TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap) {
+
+    // if (node == null)
+    // return;
+    // TreeMap.add(row, new Tuple(node, row, col));
+
+    // }
+    // ############################ Top Orde Traversal Iterative
+    static List<Integer> topView(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        if (root == null)
+            return list;
+        Queue<Pair> q = new LinkedList<Pair>();
+        q.add(new Pair(root, 0));
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            int hd = p
+        }
+
     }
 
     // ############################ Plumbing Code
