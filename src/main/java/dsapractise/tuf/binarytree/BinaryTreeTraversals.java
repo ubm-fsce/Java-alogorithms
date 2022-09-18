@@ -9,9 +9,6 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
 
-
-import javax.swing.tree.TreeNode;
-
 class Node {
 
     int data;
@@ -405,8 +402,8 @@ public class BinaryTreeTraversals {
     // TreeMap.add(row, new Tuple(node, row, col));
 
     // }
-    // ############################ Top Orde Traversal Iterative
-    static List<Integer> topView(Node root) {
+    // ############################ Top View Traversal Iterative
+    static List<Integer> topViewIterative(Node root) {
         ArrayList<Integer> list = new ArrayList<>();
         if (root == null)
             return list;
@@ -417,6 +414,8 @@ public class BinaryTreeTraversals {
             Pair p = q.poll();
             int hd = p.num;
             Node node = p.node;
+            // we are retaining first inserted values here so top valus are retained in map
+            // this helps to get top view
             if (map.get(hd) == null)
                 map.put(hd, node.data);
 
@@ -428,11 +427,41 @@ public class BinaryTreeTraversals {
                 q.add(new Pair(node.right, hd + 1));
             }
         }
-        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             list.add(entry.getValue());
         }
         return list;
 
+    }
+
+    // ############################ Bottom View Traversal Iterative
+
+    static List<Integer> bottomViewIterative(Node root) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if (root == null)
+            return list;
+        TreeMap<Integer, Integer> map = new TreeMap();
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(root, 0));
+        while (!q.isEmpty()) {
+            Pair p = q.poll();
+            int hd = p.num;
+            Node node = p.node;
+            // Note : we are OVerwriting the valus in map so first inserted values are
+            // getting overridden so that bottom view values are retained.
+            map.put(hd, node.data);
+            if (node.left != null) {
+                q.offer(new Pair(node.left, hd - 1));
+            }
+            if (node.right != null) {
+                q.offer(new Pair(node.right, hd + 1));
+            }
+
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            list.add(entry.getValue());
+        }
+        return list;
     }
 
     // ############################ Plumbing Code
@@ -467,6 +496,9 @@ public class BinaryTreeTraversals {
         BinaryTreeTraversals bts = new BinaryTreeTraversals();
 
         System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
+        System.out.println("topView ? ::==> " + topViewIterative(root));
+        System.out.println("bottomViewIterative ? ::==> " + bottomViewIterative(root));
+
         System.out.println("UDAY ====>");
     }
 
@@ -491,6 +523,7 @@ public class BinaryTreeTraversals {
         root.right.right = new Node(10);
 
         return root;
+
     }
 
 }
