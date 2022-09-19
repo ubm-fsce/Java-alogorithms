@@ -1,6 +1,6 @@
 package dsa.linkedlist;
 
-import dsa.linkedlist.dependencies.ListNode;
+import dsa.dependencies.ListNode;
 
 public class MergedLists {
 

@@ -1,4 +1,4 @@
-package dsa.binarytree.dependencies;
+package dsa.dependencies;
 
 import java.util.Vector;
 

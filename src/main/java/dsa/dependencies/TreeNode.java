@@ -1,10 +1,14 @@
-package dsa.binarytree.dependencies;
+package dsa.dependencies;
 
 public class TreeNode {
 
     public TreeNode left;
     public TreeNode right;
     public TreeNode next;
+    public int key;
+    public int val;
+    public String valStr;
+
 
     public TreeNode() {
     }
@@ -19,6 +23,12 @@ public class TreeNode {
         this.right = right;
     }
 
-    public int val;
+    public TreeNode(int key, String valstr) {
+        this.val = val;
+        this.valStr = valstr;
+
+    }
+
+
 
 }

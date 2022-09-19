@@ -1,6 +1,6 @@
 package dsa.binarytree;
 
-import dsa.binarytree.dependencies.TreeNode;
+import dsa.dependencies.TreeNode;
 
 import java.util.*;
 

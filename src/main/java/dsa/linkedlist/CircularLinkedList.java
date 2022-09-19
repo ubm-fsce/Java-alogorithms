@@ -1,11 +1,11 @@
 package dsa.linkedlist;
 
-import dsa.linkedlist.dependencies.Node2;
+import dsa.dependencies.ListNode;
 
 public class CircularLinkedList {
 
-    private Node2 first;
-    private Node2 last;
+    private ListNode first;
+    private ListNode last;
 
     public CircularLinkedList() {
         first = null;
@@ -17,8 +17,8 @@ public class CircularLinkedList {
     }
 
     public void insertFirst(int data) {
-        Node2 node = new Node2();
-        node.setData(data);
+        ListNode node = new ListNode();
+        node.setval(data);
         if (isEmpty()) {
             last = node;
         }
@@ -27,19 +27,18 @@ public class CircularLinkedList {
     }
 
     public void insertLast(int data) {
-        Node2 node = new Node2();
-        node.setData(data);
+        ListNode node = new ListNode();
+        node.setval(data);
         if (isEmpty()) {
             first = node;
         } else {
             last.setNext(node); /* the next value of the lat node will point to new node */
             last = node; /* we make the new node we created */
         }
-
     }
 
     public int deleteFirst() {
-        int temp = first.getData();
+        int temp = first.getval();
         if (first.getNext() == null) { // only single node is avaible so set last as null
             last = null;
         }
@@ -48,25 +47,54 @@ public class CircularLinkedList {
     }
 
     public int deleteLast() {
-        Node2 current = first;
-        Node2 previous = first;
+        ListNode current = first;
+        ListNode previous = first;
         while (current.getNext() != null) {
             previous = current;
             current = current.getNext();
         }
-        int temp = current.getData();
+        int temp = current.getval();
         previous.setNext(null);
         return temp;
     }
 
     public void displayList() {
         System.out.println("List First-> Last");
-        Node2 current = first;
+        ListNode current = first;
         while (current.getNext() != null) {
             current.displayNode();
             current = current.getNext();
         }
         current.displayNode();
+    }
+
+    public static void main(String[] args) {
+        testCircularLinkedList();
+    }
+
+    private static void testCircularLinkedList() {
+        CircularLinkedList circularLinkedList = new CircularLinkedList();
+        circularLinkedList.insertFirst(1);
+        circularLinkedList.insertFirst(2);
+        circularLinkedList.insertFirst(3);
+        circularLinkedList.insertFirst(4);
+        circularLinkedList.insertFirst(5);
+        circularLinkedList.insertFirst(6);
+        circularLinkedList.insertLast(11);
+        circularLinkedList.insertLast(12);
+        circularLinkedList.insertLast(13);
+        circularLinkedList.insertLast(14);
+        circularLinkedList.insertLast(15);
+        circularLinkedList.insertLast(16);
+        circularLinkedList.deleteFirst();
+        circularLinkedList.deleteLast();
+        circularLinkedList.deleteFirst();
+        circularLinkedList.deleteLast();
+        circularLinkedList.deleteFirst();
+        circularLinkedList.deleteLast();
+        circularLinkedList.deleteFirst();
+        circularLinkedList.deleteLast();
+        circularLinkedList.displayList();
     }
 
 }

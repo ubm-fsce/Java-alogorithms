@@ -1,30 +1,30 @@
 package dsa.binarytree;
 
-import dsa.binarytree.dependencies.Node2;
+import dsa.dependencies.TreeNode;
 
 public class BinarySearchTree {
 
-    private Node2 root;
+    private TreeNode root;
 
-    public void insert(int key, String value) {
-        Node2 newNode = new Node2(key, value);
+    public void insert(int key, String val) {
+        TreeNode newTreeNode = new TreeNode(key, val);
         if (root == null)
-            root = newNode;
+            root = newTreeNode;
         else {
-            Node2 current = root;
-            Node2 parent;
+            TreeNode current = root;
+            TreeNode parent;
             while (true) {
                 parent = current;
-                if (key < current.getKey()) {
-                    current = current.getLeftChild();
-                    if (current == null) { // it's parent is leafNode
-                        parent.setLeftChild(newNode);
+                if (key < current.key) {
+                    current = current.left;
+                    if (current == null) { // it's parent is leafTreeNode
+                        parent.left=(newTreeNode);
                         return;
                     }
                 } else {
-                    current = current.getRightChild();
+                    current = current.right;
                     if (current == null) {
-                        parent.setRightChild(newNode);
+                        parent.right=(newTreeNode);
                         return;
                     }
                 }
@@ -32,22 +32,22 @@ public class BinarySearchTree {
         }
     }
 
-    public Node2 findMinNode() {
-        Node2 current = root;
-        Node2 last = null;
+    public TreeNode findMinTreeNode() {
+        TreeNode current = root;
+        TreeNode last = null;
         while (current != null) {
             last = current;
-            current = current.getLeftChild();
+            current = current.left;
         }
         return last;
     }
 
-    public Node2 findMaxNode() {
-        Node2 current = root;
-        Node2 last = null;
+    public TreeNode findMaxTreeNode() {
+        TreeNode current = root;
+        TreeNode last = null;
         while (current != null) {
             last = current;
-            current = current.getRightChild();
+            current = current.right;
         }
         return last;
     }
@@ -61,8 +61,8 @@ public class BinarySearchTree {
         binarySearchTree.insert(12, "Twelve");
         binarySearchTree.insert(25, "Twenty five");
         binarySearchTree.insert(6, "Six");
-        System.out.println(binarySearchTree.findMaxNode());
-        System.out.println(binarySearchTree.findMinNode());
+        System.out.println(binarySearchTree.findMaxTreeNode());
+        System.out.println(binarySearchTree.findMinTreeNode());
     }
 
 }

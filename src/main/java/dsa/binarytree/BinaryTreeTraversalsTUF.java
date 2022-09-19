@@ -1,6 +1,6 @@
 package dsa.binarytree;
 
-import dsa.binarytree.dependencies.Node;
+import dsa.dependencies.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -16,9 +16,9 @@ import java.util.TreeMap;
 public class BinaryTreeTraversalsTUF {
 
     // ############################ IN Order Traversal ############################
-    static ArrayList<Integer> inOrderIterativeTraversal(Node curr) {
+    static ArrayList<Integer> inOrderIterativeTraversal(TreeNode curr) {
         ArrayList<Integer> inOrder = new ArrayList<>();
-        Stack<Node> stack = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
         while (true) {
             if (curr != null) {
                 stack.push(curr);
@@ -27,7 +27,7 @@ public class BinaryTreeTraversalsTUF {
                 if (stack.isEmpty())
                     break;
                 curr = stack.pop();
-                inOrder.add(curr.data);
+                inOrder.add(curr.val);
                 // stack.pop();
                 curr = curr.right;
             }
@@ -35,24 +35,24 @@ public class BinaryTreeTraversalsTUF {
         return inOrder;
     }
 
-    static void inOrderRecursiveTraversal(Node curr, ArrayList<Integer> inOrder) {
+    static void inOrderRecursiveTraversal(TreeNode curr, ArrayList<Integer> inOrder) {
         if (curr == null)
             return;
         inOrderRecursiveTraversal(curr.left, inOrder);
-        inOrder.add(curr.data);
+        inOrder.add(curr.val);
         inOrderRecursiveTraversal(curr.right, inOrder);
     }
     // ############################ PRE Order Traversal ############################
 
-    static ArrayList<Integer> preOrderIterativeTraversal(Node curr) {
+    static ArrayList<Integer> preOrderIterativeTraversal(TreeNode curr) {
         ArrayList<Integer> preOrderList = new ArrayList<>();
         if (curr == null)
             return preOrderList;
-        Stack<Node> stack = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
         stack.push(curr);
         while (!stack.isEmpty()) {
-            Node top = stack.pop();
-            preOrderList.add(top.data);
+            TreeNode top = stack.pop();
+            preOrderList.add(top.val);
             if (top.right != null)
                 stack.push(top.right);
             if (top.left != null)
@@ -61,30 +61,30 @@ public class BinaryTreeTraversalsTUF {
         return preOrderList;
     }
 
-    static void preOrderRecursiveTraversal(Node curr, ArrayList<Integer> preOrderList) {
+    static void preOrderRecursiveTraversal(TreeNode curr, ArrayList<Integer> preOrderList) {
         if (curr == null)
             return;
-        preOrderList.add(curr.data);
+        preOrderList.add(curr.val);
         preOrderRecursiveTraversal(curr.left, preOrderList);
         preOrderRecursiveTraversal(curr.right, preOrderList);
     }
 
     // ############################ POST Order Traversal
     // ############################
-    static void postOrderRecursiveTraversal(Node curr, ArrayList<Integer> postOrderList) {
+    static void postOrderRecursiveTraversal(TreeNode curr, ArrayList<Integer> postOrderList) {
         if (curr == null)
             return;
         postOrderRecursiveTraversal(curr.left, postOrderList);
         postOrderRecursiveTraversal(curr.right, postOrderList);
-        postOrderList.add(curr.data);
+        postOrderList.add(curr.val);
     }
 
-    static ArrayList<Integer> postOrderTwoStackTraversal(Node curr) {
+    static ArrayList<Integer> postOrderTwoStackTraversal(TreeNode curr) {
         ArrayList<Integer> postOrderList = new ArrayList<>();
         if (curr == null)
             return postOrderList;
-        Stack<Node> s1 = new Stack<>();
-        Stack<Node> s2 = new Stack<>();
+        Stack<TreeNode> s1 = new Stack<>();
+        Stack<TreeNode> s2 = new Stack<>();
         s1.push(curr);
         while (!s1.isEmpty()) {
             curr = s1.pop();
@@ -95,7 +95,7 @@ public class BinaryTreeTraversalsTUF {
                 s1.push(curr.right);
         }
         while (!s2.isEmpty()) {
-            postOrderList.add(s2.pop().data);
+            postOrderList.add(s2.pop().val);
         }
         return postOrderList;
     }
@@ -104,17 +104,17 @@ public class BinaryTreeTraversalsTUF {
     // ############################
     static class Pair {
 
-        Node node;
+        TreeNode TreeNode;
         Integer num;
 
-        Pair(Node _node, int _num) {
+        Pair(TreeNode _TreeNode, int _num) {
             num = _num;
-            node = _node;
+            TreeNode = _TreeNode;
         }
 
     }
 
-    void allTraversal(Node root, List<Integer> pre, List<Integer> in, List<Integer> post) {
+    void allTraversal(TreeNode root, List<Integer> pre, List<Integer> in, List<Integer> post) {
         Stack<Pair> st = new Stack<Pair>();
         st.push(new Pair(root, 1));
         if (root == null)
@@ -122,45 +122,45 @@ public class BinaryTreeTraversalsTUF {
         while (!st.isEmpty()) {
             Pair it = st.pop();
             if (it.num == 1) {
-                pre.add(it.node.data);
+                pre.add(it.TreeNode.val);
                 it.num++;
                 st.push(it);
-                if (it.node.left != null) {
-                    st.push(new Pair(it.node.left, 1));
+                if (it.TreeNode.left != null) {
+                    st.push(new Pair(it.TreeNode.left, 1));
                 }
             } else if (it.num == 2) {
-                in.add(it.node.data);
+                in.add(it.TreeNode.val);
                 it.num++;
-                st.push(new Pair(it.node.right, 1));
+                st.push(new Pair(it.TreeNode.right, 1));
             } else {
-                post.add(it.node.data);
+                post.add(it.TreeNode.val);
             }
         }
     }
     // ############################ Maximum depth of a Binary Tree
     // ############################
 
-    int depthofTreeIterative(Node root) {
+    int depthofTreeIterative(TreeNode root) {
         if (root == null)
             return 0;
-        Queue<Node> queue = new LinkedList<Node>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.offer(root);
         int level = 0;
         while (!queue.isEmpty()) {
             level++;
             int size = queue.size();
             for (int i = 0; i < size; i++) {
-                Node tempNode = queue.poll();
-                if (tempNode.left != null)
-                    queue.offer(tempNode.left);
-                if (tempNode.right != null)
-                    queue.offer(tempNode.right);
+                TreeNode tempTreeNode = queue.poll();
+                if (tempTreeNode.left != null)
+                    queue.offer(tempTreeNode.left);
+                if (tempTreeNode.right != null)
+                    queue.offer(tempTreeNode.right);
             }
         }
         return level;
     }
 
-    int depthOfTreeRecursive(Node root) {
+    int depthOfTreeRecursive(TreeNode root) {
         if (root == null)
             return 0;
         int lh = depthOfTreeRecursive(root.left);
@@ -170,7 +170,7 @@ public class BinaryTreeTraversalsTUF {
     // ############################ Check is Binary Tree balanced ??
     // ############################
 
-    static int dfsBalancedRecursive(Node root) {
+    static int dfsBalancedRecursive(TreeNode root) {
         if (root == null)
             return 0;
         int lh = dfsBalancedRecursive(root.left);
@@ -184,14 +184,14 @@ public class BinaryTreeTraversalsTUF {
         return Math.max(lh, rh) + 1;
     }
 
-    static boolean isBalancedBinaryTree(Node root) {
+    static boolean isBalancedBinaryTree(TreeNode root) {
         return dfsBalancedRecursive(root) != -1;
     }
     // : UDAY == >iterative Approach dfsHeightIterative <==
     // ############################ Diameter of a Binary Tree
     // ############################
 
-    static int diameterOfBinaryTreeRecursive(Node root, int[] diameter) {
+    static int diameterOfBinaryTreeRecursive(TreeNode root, int[] diameter) {
         if (root == null)
             return 0;
         int lh = diameterOfBinaryTreeRecursive(root.left, diameter);
@@ -203,16 +203,16 @@ public class BinaryTreeTraversalsTUF {
 
     // ############################ Maximum Path sum of a binary tree
 
-    static int maxPathSumRecursive(Node root, int[] maxPathSum) {
+    static int maxPathSumRecursive(TreeNode root, int[] maxPathSum) {
         if (root == null)
             return 0;
         int lsum = Math.max(Integer.MIN_VALUE, maxPathSumRecursive(root.left, maxPathSum));
         int rSum = Math.max(Integer.MIN_VALUE, maxPathSumRecursive(root.right, maxPathSum));
-        maxPathSum[0] = Math.max(maxPathSum[0], (root.data + lsum + rSum));
-        return Math.max(lsum, rSum) + root.data;
+        maxPathSum[0] = Math.max(maxPathSum[0], (root.val + lsum + rSum));
+        return Math.max(lsum, rSum) + root.val;
     }
 
-    public static int maxPathSum(Node root) {
+    public static int maxPathSum(TreeNode root) {
         int maxpathsumArray[] = { Integer.MIN_VALUE };
         maxPathSumRecursive(root, maxpathsumArray);
         return maxpathsumArray[0];
@@ -220,30 +220,30 @@ public class BinaryTreeTraversalsTUF {
 
     // ############################ Check if two trees are identical
 
-    static boolean check(Node root1, Node root2) {
+    static boolean check(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null)
             return true;
         if (root1 == null || root2 == null)
             return false;
-        if (root1.data != root2.data)
+        if (root1.val != root2.val)
             return false;
 
         return true;
     }
 
     // https://leetcode.com/problems/same-tree/solution/
-    static boolean isIdenticalTreesIterative(Node root1, Node root2) {
+    static boolean isIdenticalTreesIterative(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null)
             return true;
         if (!check(root1, root2))
             return false;
 
-        Queue<Node> q1 = new LinkedList<>();
-        Queue<Node> q2 = new LinkedList<>();
+        Queue<TreeNode> q1 = new LinkedList<>();
+        Queue<TreeNode> q2 = new LinkedList<>();
         q1.offer(root1);
         q2.offer(root2);
         while (!q1.isEmpty()) {
-            Node r1n = null, r2n = null;
+            TreeNode r1n = null, r2n = null;
             r1n = q1.poll();
             r2n = q2.poll();
 
@@ -269,22 +269,22 @@ public class BinaryTreeTraversalsTUF {
         return true;
     }
 
-    static boolean isIdenticalTreesRecursive(Node root1, Node root2) {
+    static boolean isIdenticalTreesRecursive(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null)
             return true;
         if (root1 == null || root2 == null)
             return false;
         return isIdenticalTreesRecursive(root1.left, root2.left) &&
-                isIdenticalTreesRecursive(root1.right, root2.right) && root1.data == root2.data;
+                isIdenticalTreesRecursive(root1.right, root2.right) && root1.val == root2.val;
     }
 
     // ############################ ZIGZAG Traversal
 
-    public static List<List<Integer>> zigzagLevelOrder(Node root) {
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         if (root == null)
             return result;
-        Queue<Node> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
         boolean flip = false;
         while (!q.isEmpty()) {
@@ -296,9 +296,9 @@ public class BinaryTreeTraversalsTUF {
                 if (q.peek().right != null)
                     q.offer(q.peek().right);
                 if (flip == true)
-                    sublist.add(q.poll().data);
+                    sublist.add(q.poll().val);
                 else
-                    sublist.add(0, q.poll().data);
+                    sublist.add(0, q.poll().val);
 
             }
             flip = !flip;
@@ -310,24 +310,24 @@ public class BinaryTreeTraversalsTUF {
 
     // ############################ Vertical Orde Traversal iterative
     class Tuple {
-        Node node;
+        TreeNode TreeNode;
         int row;
         int column;
 
-        public Tuple(Node n, int r, int c) {
-            this.node = n;
+        public Tuple(TreeNode n, int r, int c) {
+            this.TreeNode = n;
             this.row = r;
             this.column = c;
         }
     }
 
-    List<List<Integer>> verticalOrderTraversalIterative(Node root) {
+    List<List<Integer>> verticalOrderTraversalIterative(TreeNode root) {
         TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap = new TreeMap<>();
         Queue<Tuple> q = new LinkedList<Tuple>();
         q.offer(new Tuple(root, 0, 0));
         while (!q.isEmpty()) {
             Tuple t = q.poll();
-            Node node = t.node;
+            TreeNode TreeNode = t.TreeNode;
             int r = t.row;
             int c = t.column;
             if (!treemap.containsKey(r)) {
@@ -336,12 +336,12 @@ public class BinaryTreeTraversalsTUF {
             if (!treemap.get(r).containsKey(c)) {
                 treemap.get(r).put(c, new PriorityQueue<Integer>());
             }
-            treemap.get(r).get(c).offer(node.data);
-            if (node.left != null) {
-                q.offer(new Tuple(node.left, r - 1, c + 1));
+            treemap.get(r).get(c).offer(TreeNode.val);
+            if (TreeNode.left != null) {
+                q.offer(new Tuple(TreeNode.left, r - 1, c + 1));
             }
-            if (node.right != null) {
-                q.offer(new Tuple(node.right, r + 1, c + 1));
+            if (TreeNode.right != null) {
+                q.offer(new Tuple(TreeNode.right, r + 1, c + 1));
 
             }
         }
@@ -349,9 +349,9 @@ public class BinaryTreeTraversalsTUF {
         List<List<Integer>> list = new ArrayList<>();
         for (TreeMap<Integer, PriorityQueue<Integer>> ys : treemap.values()) {
             list.add(new ArrayList<Integer>());
-            for (PriorityQueue<Integer> nodes : ys.values()) {
-                while (!nodes.isEmpty()) {
-                    list.get(list.size() - 1).add(nodes.poll());
+            for (PriorityQueue<Integer> TreeNodes : ys.values()) {
+                while (!TreeNodes.isEmpty()) {
+                    list.get(list.size() - 1).add(TreeNodes.poll());
                 }
             }
         }
@@ -359,22 +359,22 @@ public class BinaryTreeTraversalsTUF {
     }
 
     // ############################ Vertical Orde Traversal Recursive
-    // static List<List<Integer>> verticalOrderTraversalRecursvie(Node root) {
+    // static List<List<Integer>> verticalOrderTraversalRecursvie(TreeNode root) {
     // TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap = new
     // TreeMap<>();
     // }
 
-    // private static void dfsVerticalOrderTraversal(Node node, Integer row, Integer
+    // private static void dfsVerticalOrderTraversal(TreeNode TreeNode, Integer row, Integer
     // col,
     // TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap) {
 
-    // if (node == null)
+    // if (TreeNode == null)
     // return;
-    // TreeMap.add(row, new Tuple(node, row, col));
+    // TreeMap.add(row, new Tuple(TreeNode, row, col));
 
     // }
     // ############################ Top View Traversal Iterative
-    static List<Integer> topViewIterative(Node root) {
+    static List<Integer> topViewIterative(TreeNode root) {
         ArrayList<Integer> list = new ArrayList<>();
         if (root == null)
             return list;
@@ -384,18 +384,18 @@ public class BinaryTreeTraversalsTUF {
         while (!q.isEmpty()) {
             Pair p = q.poll();
             int hd = p.num;
-            Node node = p.node;
+            TreeNode TreeNode = p.TreeNode;
             // we are retaining first inserted values here so top valus are retained in map
             // this helps to get top view
             if (map.get(hd) == null)
-                map.put(hd, node.data);
+                map.put(hd, TreeNode.val);
 
-            if (node.left != null) {
+            if (TreeNode.left != null) {
 
-                q.add(new Pair(node.left, hd - 1));
+                q.add(new Pair(TreeNode.left, hd - 1));
             }
-            if (node.right != null) {
-                q.add(new Pair(node.right, hd + 1));
+            if (TreeNode.right != null) {
+                q.add(new Pair(TreeNode.right, hd + 1));
             }
         }
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
@@ -407,7 +407,7 @@ public class BinaryTreeTraversalsTUF {
 
     // ############################ Bottom View Traversal Iterative
 
-    static List<Integer> bottomViewIterative(Node root) {
+    static List<Integer> bottomViewIterative(TreeNode root) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         if (root == null)
             return list;
@@ -417,15 +417,15 @@ public class BinaryTreeTraversalsTUF {
         while (!q.isEmpty()) {
             Pair p = q.poll();
             int hd = p.num;
-            Node node = p.node;
+            TreeNode TreeNode = p.TreeNode;
             // Note : we are OVerwriting the valus in map so first inserted values are
             // getting overridden so that bottom view values are retained.
-            map.put(hd, node.data);
-            if (node.left != null) {
-                q.offer(new Pair(node.left, hd - 1));
+            map.put(hd, TreeNode.val);
+            if (TreeNode.left != null) {
+                q.offer(new Pair(TreeNode.left, hd - 1));
             }
-            if (node.right != null) {
-                q.offer(new Pair(node.right, hd + 1));
+            if (TreeNode.right != null) {
+                q.offer(new Pair(TreeNode.right, hd + 1));
             }
 
         }
@@ -438,11 +438,11 @@ public class BinaryTreeTraversalsTUF {
     // ############################ Plumbing Code
     public static void main(String args[]) {
 
-        Node root = getTree();
-        Node root1 = new Node(1);
-        root1.left = new Node(2);
-        Node root2 = new Node(1);
-        root1.right = new Node(2);
+        TreeNode root = getTree();
+        TreeNode root1 = new TreeNode(1);
+        root1.left = new TreeNode(2);
+        TreeNode root2 = new TreeNode(1);
+        root1.right = new TreeNode(2);
         ArrayList<Integer> inOrder;
         inOrder = inOrderIterativeTraversal(root);
         printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
@@ -482,16 +482,16 @@ public class BinaryTreeTraversalsTUF {
         System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ": END ");
     }
 
-    static Node getTree() {
-        Node root = new Node(1);
-        root.left = new Node(2);
-        root.left.left = new Node(4);
-        root.left.right = new Node(10);
-        root.left.left.right = new Node(5);
-        root.left.left.right.right = new Node(6);
-        root.right = new Node(3);
-        root.right.left = new Node(9);
-        root.right.right = new Node(10);
+    static TreeNode getTree() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(10);
+        root.left.left.right = new TreeNode(5);
+        root.left.left.right.right = new TreeNode(6);
+        root.right = new TreeNode(3);
+        root.right.left = new TreeNode(9);
+        root.right.right = new TreeNode(10);
 
         return root;
 

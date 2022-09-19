@@ -1,6 +1,6 @@
 package dsa.linkedlist;
 
-import dsa.linkedlist.dependencies.ListNode;
+import dsa.dependencies.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;
