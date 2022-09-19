@@ -1,5 +1,7 @@
 package dsa.binarytree;
 
+import dsa.binarytree.dependencies.TreeNode;
+
 import java.util.*;
 
 public class ZigZagTraversal {

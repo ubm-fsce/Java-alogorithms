@@ -1,5 +1,7 @@
 package dsa.binarytree;
 
+import dsa.binarytree.dependencies.Node;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,40 +11,9 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
 
-class Node {
 
-    int data;
-    Node left, right, next;
 
-    Node(int data) {
-        this.data = data;
-        left = null;
-        right = null;
-        next = null;
-    }
-
-    // level order traversal using 'next' pointer
-    public void printLevelOrder() {
-        Node nextLevelRoot = this;
-        while (nextLevelRoot != null) {
-            Node current = nextLevelRoot;
-            nextLevelRoot = null;
-            while (current != null) {
-                System.out.print(current.data + " ");
-                if (nextLevelRoot == null) {
-                    if (current.left != null)
-                        nextLevelRoot = current.left;
-                    else if (current.right != null)
-                        nextLevelRoot = current.right;
-                }
-                current = current.next;
-            }
-            System.out.println();
-        }
-    }
-};
-
-public class BinaryTreeTraversals {
+public class BinaryTreeTraversalsTUF {
 
     // ############################ IN Order Traversal ############################
     static ArrayList<Integer> inOrderIterativeTraversal(Node curr) {
@@ -493,7 +464,7 @@ public class BinaryTreeTraversals {
         System.out.println("isIdenticalTreesRecursive ? ::==> " +
                 isIdenticalTreesRecursive(root, getTree()));
         System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
-        BinaryTreeTraversals bts = new BinaryTreeTraversals();
+        BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
 
         System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
         System.out.println("topView ? ::==> " + topViewIterative(root));

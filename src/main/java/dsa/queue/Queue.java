@@ -1,6 +1,7 @@
 package dsa.queue;
 
 public class Queue {
+
     private int maxSize;
     private long[] queueArray;
     private int front;
@@ -26,7 +27,6 @@ public class Queue {
 
     public void view() {
         System.out.print("[ ");
-
         for (int i = 0; i < queueArray.length; i++) {
             System.out.print(queueArray[i] + ", ");
         }
@@ -53,6 +53,30 @@ public class Queue {
 
     public boolean isFull() {
         return nItems == maxSize;
+    }
+
+    // Plumbing Code
+    public static void main(String args[]) {
+        Queue q = new Queue(5);
+        q.insert(1);
+        q.insert(6);
+        q.insert(10);
+        q.insert(5);
+        q.insert(2);
+        q.insert(2);
+        q.insert(2);
+        q.insert(2);
+        q.remove();
+        q.view();
+        q.remove();
+        q.remove();
+        q.remove();
+        q.remove();
+        q.remove();
+        q.remove();
+        q.remove();
+        q.remove();
+        q.view();
     }
 
 }

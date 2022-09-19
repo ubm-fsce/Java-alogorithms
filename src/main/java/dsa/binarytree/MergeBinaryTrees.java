@@ -1,5 +1,7 @@
 package dsa.binarytree;
 
+import dsa.binarytree.dependencies.TreeNode;
+
 public class MergeBinaryTrees {
 
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
@@ -15,24 +17,3 @@ public class MergeBinaryTrees {
 
 }
 
-class TreeNode {
-
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode() {
-    }
-
-    TreeNode(int val) {
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-
-    int val;
-
-}

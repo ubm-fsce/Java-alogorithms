@@ -1,8 +1,8 @@
-package dsa.binarytree;
+package dsa.binarytree.dependencies;
 
 public class Node2 {
     public int key;
-    String value;
+    public String value;
     Node2 leftChild, RightChild;
 
     public Node2(int key, String value) {

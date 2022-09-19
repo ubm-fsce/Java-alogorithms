@@ -1,16 +1,8 @@
 package dsa.binarytree;
 
-class Node {
-    int data;
-    Node left, right;
+import dsa.binarytree.dependencies.Node;
 
-    Node(int d) {
-        data = d;
-        left = right = null;
-    }
-}
-
-public class BinaryTreeBalanced {
+class BinaryTreeBalanced {
     Node root;
 
     /* Returns true if binary tree with root as root is height-balanced */

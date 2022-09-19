@@ -1,5 +1,7 @@
 package dsa.linkedlist;
 
+import dsa.linkedlist.dependencies.ListNode;
+
 public class TwoSum {
 
     public static void main(String[] args) {

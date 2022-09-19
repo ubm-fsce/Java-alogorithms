@@ -1,9 +1,9 @@
-package dsa.linkedlist;
+package dsa.linkedlist.dependencies;
 
 public class Node2 {
-    int data;
-    Node2 next = null;
-    Node2 previous = null; /* This is for doubly linked list only */
+    public  int data;
+    public Node2 next = null;
+    public Node2 previous = null; /* This is for doubly linked list only */
 
     public int getData() {
         return data;

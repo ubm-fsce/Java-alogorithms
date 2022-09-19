@@ -1,4 +1,4 @@
-package dsa.slidingwindow;
+package dsa.twopointer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

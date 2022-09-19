@@ -1,34 +1,22 @@
 package dsa.binarytree;
 
+import dsa.binarytree.dependencies.BinaryTreeNode;
+import dsa.binarytree.dependencies.NodeVec;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Vector;
 
 // Represents a node of an n-ary tree
-class Node {
 
-    int key;
-    Vector<Node> child;
 
-};
 
-class BinaryTreeNode {
-
-    int data;
-    BinaryTreeNode left, right;
-
-    BinaryTreeNode(int d) {
-        data = d;
-        left = right = null;
-    }
-
-}
 
 public class BinaryTreePractise {
 
     // Utility function to create a new tree node
-    Node newNode(int key) {
-        Node temp = new Node();
+    NodeVec newNode(int key) {
+        NodeVec temp = new NodeVec();
         temp.key = key;
         temp.child = new Vector<>();
         return temp;
@@ -36,7 +24,7 @@ public class BinaryTreePractise {
 
     public void testNonBinaryTreeSum() {
         // Creating a generic tree
-        Node root = newNode(20);
+        NodeVec root = newNode(20);
         (root.child).add(newNode(2));
         (root.child).add(newNode(34));
         (root.child).add(newNode(50));
@@ -276,13 +264,13 @@ public class BinaryTreePractise {
         return false;
     }
 
-    public int sumNodesNonRecursive(Node root) {
+    public int sumNodesNonRecursive(NodeVec root) {
         // initialize the sum variable
         int sum = 0;
         if (root == null)
             return 0;
         // Creating a queue and pushing the root
-        Queue<Node> q = new LinkedList<>();
+        Queue<NodeVec> q = new LinkedList<>();
         q.add(root);
         while (!q.isEmpty()) {
             int n = q.size();
@@ -290,7 +278,7 @@ public class BinaryTreePractise {
             while (n > 0) {
                 // Dequeue an item from queue and
                 // add it to variable "sum"
-                Node p = q.peek();
+                NodeVec p = q.peek();
                 q.remove();
                 sum += p.key;
                 // Enqueue all children of the dequeued item

@@ -1,6 +1,6 @@
 package dsa.linkedlist;
 
-import dsa.linkedlist.Node2;
+import dsa.linkedlist.dependencies.Node2;
 
 public class SinglyLinkedList {
     private Node2 first;

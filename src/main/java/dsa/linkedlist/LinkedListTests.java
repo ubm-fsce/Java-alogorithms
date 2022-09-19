@@ -1,5 +1,7 @@
 package dsa.linkedlist;
 
+import dsa.linkedlist.dependencies.Node2;
+
 public class LinkedListTests {
     public static void main(String[] args) {
         // nodeTest();
