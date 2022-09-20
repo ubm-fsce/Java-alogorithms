@@ -1,7 +1,5 @@
 package dsa.binarytree;
 
-import dsa.dependencies.TreeNode;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
 
-
+import dsa.dependencies.TreeNode;
 
 public class BinaryTreeTraversalsTUF {
 
@@ -138,7 +136,6 @@ public class BinaryTreeTraversalsTUF {
         }
     }
     // ############################ Maximum depth of a Binary Tree
-    // ############################
 
     int depthofTreeIterative(TreeNode root) {
         if (root == null)
@@ -364,7 +361,8 @@ public class BinaryTreeTraversalsTUF {
     // TreeMap<>();
     // }
 
-    // private static void dfsVerticalOrderTraversal(TreeNode TreeNode, Integer row, Integer
+    // private static void dfsVerticalOrderTraversal(TreeNode TreeNode, Integer row,
+    // Integer
     // col,
     // TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> treemap) {
 
@@ -435,6 +433,133 @@ public class BinaryTreeTraversalsTUF {
         return list;
     }
 
+    // ############################ Symmetric Tree Recursive
+    public boolean isSymmetricRecursive(TreeNode root) {
+        return symmetricUtil(root.left, root.right);
+    }
+
+    static boolean symmetricUtil(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (root1 == null || root2 == null)
+            return false;
+        return (root1.val == root2.val) && symmetricUtil(root1.left, root2.right)
+                && symmetricUtil(root2.left, root1.right);
+
+    }
+
+    // ############################ Symmetric Tree Iterative
+    public boolean isSymmetricIterative(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode tn1 = q.poll();
+            TreeNode tn2 = q.poll();
+            if (tn1 == null && tn2 == null)
+                continue;
+            if (tn1 == null || tn2 == null)
+                return false;
+            if (tn1.val != tn2.val)
+                return false;
+            q.add(tn1.left);
+            q.add(tn2.right);
+            q.add(tn1.right);
+            q.add(tn2.left);
+
+        }
+        return true;
+    }
+    // ############################ Right View of a Binary Tree Recursive
+
+    public List<Integer> rightSideViewRecursive(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null)
+            return res;
+        rvRecursive(root, 0, res);
+
+        return res;
+    }
+
+    static void rvRecursive(TreeNode root, Integer currDepth, List<Integer> res) {
+        if (root == null)
+            return;
+        if (currDepth == res.size()) {
+            res.add(root.val);
+        }
+        rvRecursive(root.right, currDepth + 1, res);
+        rvRecursive(root.left, currDepth + 1, res);
+    }
+
+    // ############################ Right View of a Binary Tree Iterative
+    public List<Integer> rightSideViewItertaive(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        if (root == null)
+            return list;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = q.poll();
+                if (temp.left != null)
+                    q.offer(temp.left);
+                if (temp.right != null)
+                    q.offer(temp.right);
+                if (i == (size - 1)) {
+                    list.add(temp.val);
+                }
+            }
+        }
+        return list;
+    }
+
+    // ############################ Left View of a Binary Tree Recursive
+
+    public List<Integer> leftSideViewRecursive(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root == null)
+            return res;
+        leftvRecursive(root, 0, res);
+
+        return res;
+    }
+
+    static void leftvRecursive(TreeNode root, Integer currDepth, List<Integer> res) {
+        if (root == null)
+            return;
+        if (currDepth == res.size()) {
+            res.add(root.val);
+        }
+        leftvRecursive(root.left, currDepth + 1, res);
+        leftvRecursive(root.right, currDepth + 1, res);
+    }
+
+    // ############################ Right View of a Binary Tree Iterative
+    public List<Integer> leftSideViewItertaive(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        if (root == null)
+            return list;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = q.poll();
+                if (temp.left != null)
+                    q.offer(temp.left);
+                if (temp.right != null)
+                    q.offer(temp.right);
+                if (i == (0)) {
+                    list.add(temp.val);
+                }
+            }
+        }
+        return list;
+    }
+
     // ############################ Plumbing Code
     public static void main(String args[]) {
 
@@ -469,6 +594,12 @@ public class BinaryTreeTraversalsTUF {
         System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
         System.out.println("topView ? ::==> " + topViewIterative(root));
         System.out.println("bottomViewIterative ? ::==> " + bottomViewIterative(root));
+        System.out.println("isSymmetricRecursive ? ::==> " + bts.isSymmetricRecursive(root));
+        System.out.println("isSymmetricIterative ? ::==> " + bts.isSymmetricIterative(root));
+        System.out.println("rightSideViewRecursive ? ::==> " + bts.rightSideViewRecursive(root));
+        System.out.println("rightSideViewItertaive ? ::==> " + bts.rightSideViewItertaive(root));
+        System.out.println("leftSideViewRecursive ? ::==> " + bts.leftSideViewRecursive(root));
+        System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
 
         System.out.println("UDAY ====>");
     }
