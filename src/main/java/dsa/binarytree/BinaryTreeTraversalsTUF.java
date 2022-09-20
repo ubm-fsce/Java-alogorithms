@@ -68,7 +68,7 @@ public class BinaryTreeTraversalsTUF {
     }
 
     // ############################ POST Order Traversal
-    // ############################
+
     static void postOrderRecursiveTraversal(TreeNode curr, ArrayList<Integer> postOrderList) {
         if (curr == null)
             return;
@@ -99,7 +99,7 @@ public class BinaryTreeTraversalsTUF {
     }
 
     // ############################ Three Traversals in one method
-    // ############################
+
     static class Pair {
 
         TreeNode TreeNode;
@@ -165,7 +165,6 @@ public class BinaryTreeTraversalsTUF {
         return 1 + Math.max(lh, rh);
     }
     // ############################ Check is Binary Tree balanced ??
-    // ############################
 
     static int dfsBalancedRecursive(TreeNode root) {
         if (root == null)
@@ -186,7 +185,6 @@ public class BinaryTreeTraversalsTUF {
     }
     // : UDAY == >iterative Approach dfsHeightIterative <==
     // ############################ Diameter of a Binary Tree
-    // ############################
 
     static int diameterOfBinaryTreeRecursive(TreeNode root, int[] diameter) {
         if (root == null)
