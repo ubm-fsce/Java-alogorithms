@@ -1,6 +1,7 @@
 package dsa.binarytree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -407,7 +408,7 @@ public class BinaryTreeTraversalsTUF {
         ArrayList<Integer> list = new ArrayList<Integer>();
         if (root == null)
             return list;
-        TreeMap<Integer, Integer> map = new TreeMap();
+        TreeMap<Integer, Integer> map = new TreeMap<>();
         Queue<Pair> q = new LinkedList<>();
         q.offer(new Pair(root, 0));
         while (!q.isEmpty()) {
@@ -558,6 +559,127 @@ public class BinaryTreeTraversalsTUF {
         return list;
     }
 
+    // ############################ Print root to node path
+    static List<Integer> root2nodePath(TreeNode root, int nodeVal) {
+        List<Integer> list = new ArrayList<>();
+        r2nRecursive(root, nodeVal, list);
+        return list;
+    }
+
+    static boolean r2nRecursive(TreeNode node, int nodeVal, List<Integer> list) {
+        if (node == null)
+            return false;
+        list.add(node.val);
+        if (node.val == nodeVal)
+            return true;
+        if (r2nRecursive(node.left, nodeVal, list) || r2nRecursive(node.right, nodeVal, list))
+            return true;
+
+        list.remove(list.size() - 1);
+        return false;
+
+    }
+
+    static TreeNode lCARecursive(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q)
+            return root;
+        TreeNode left = lCARecursive(root.left, p, q);
+        TreeNode right = lCARecursive(root.right, p, q);
+        if (left == null)
+            return right;
+        else if (right == null)
+            return left;
+        else
+            return root;
+
+    }
+
+    private static TreeNode ans = null;
+
+    static TreeNode getAnsforlCARecursive2(TreeNode currentNode, TreeNode p, TreeNode q) {
+        lCARecursive2(currentNode, p, q);
+        return ans;
+    }
+
+    static boolean lCARecursive2(TreeNode currentNode, TreeNode p, TreeNode q) {
+        // If reached the end of a branch, return false.
+        if (currentNode == null) {
+            return false;
+        }
+
+        // Left Recursion. If left recursion returns true, set left = 1 else 0
+        int left = lCARecursive2(currentNode.left, p, q) ? 1 : 0;
+
+        // Right Recursion
+        int right = lCARecursive2(currentNode.right, p, q) ? 1 : 0;
+
+        // If the current node is one of p or q
+        int mid = (currentNode == p || currentNode == q) ? 1 : 0;
+
+        // If any two of the flags left, right or mid become True
+        if (mid + left + right >= 2) {
+            ans = currentNode;
+        }
+
+        // Return true if any one of the three bool values is True.
+        return (mid + left + right > 0);
+
+    }
+
+    // ############################ Print all nodes at a distance K in Binary Tree
+    private static void markParents(TreeNode root, Map<TreeNode, TreeNode> parent_track) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+
+            TreeNode curr = q.poll();
+            if (curr.left != null) {
+                parent_track.put(curr.left, curr);
+                q.offer(curr.left);
+            }
+            if (curr.right != null) {
+                parent_track.put(curr.right, curr);
+                q.offer(curr.right);
+            }
+
+        }
+    }
+
+    public static List<Integer> NodesAtdistanceK(TreeNode root, TreeNode target, int k) {
+        Map<TreeNode, TreeNode> parent_track = new HashMap<>();
+        markParents(root, parent_track);
+        Map<TreeNode, Boolean> visited = new HashMap<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(target);
+        visited.put(target, true);
+        int curr_level = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            if (curr_level == k)
+                break;
+            curr_level++;
+            for (int i = 0; i < size; i++) {
+                TreeNode curr = q.poll();
+                if (curr.left != null && visited.get(curr.left) == null) {
+                    q.offer(curr.left);
+                    visited.put(curr.left, true);
+                }
+                if (curr.right != null && visited.get(curr.right) == null) {
+                    q.offer(curr.right);
+                    visited.put(curr.right, true);
+                }
+            }
+        }
+        List<Integer> res = new ArrayList<>();
+        while (!q.isEmpty()) {
+            TreeNode curr = q.poll();
+            res.add(curr.val);
+        }
+        return res;
+    }
+
+    // ###### Minimum time takean to BURN the Binary tree from a Node
+
     // ############################ Plumbing Code
     public static void main(String args[]) {
 
@@ -598,6 +720,11 @@ public class BinaryTreeTraversalsTUF {
         System.out.println("rightSideViewItertaive ? ::==> " + bts.rightSideViewItertaive(root));
         System.out.println("leftSideViewRecursive ? ::==> " + bts.leftSideViewRecursive(root));
         System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
+        System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
+
+        System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(9), new TreeNode(2)));
+        System.out.println(
+                "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(4)));
 
         System.out.println("UDAY ====>");
     }
