@@ -680,6 +680,41 @@ public class BinaryTreeTraversalsTUF {
 
     // ###### Minimum time takean to BURN the Binary tree from a Node
 
+    // ###### Count total nodes in a complete Binary Tree
+
+    public int getRightHeight(TreeNode root) {
+        int count = 0;
+        TreeNode curr = root;
+        while (curr.right != null) {
+            count++;
+            curr = curr.right;
+
+        }
+        return count;
+    }
+
+    public int getLeftHeight(TreeNode root) {
+        int count = 0;
+        TreeNode curr = root;
+        while (curr.left != null) {
+            count++;
+            curr = curr.left;
+        }
+        return count;
+    }
+
+    public int countNodesinCompleteBinaryTree(TreeNode root) {
+        if (root == null)
+            return 0;
+        int lh = getLeftHeight(root);
+        int rh = getRightHeight(root);
+        if (lh == rh)
+            return (1 << lh) - 1;
+        int leftNodes = countNodesinCompleteBinaryTree(root.left);
+        int rightNodes = countNodesinCompleteBinaryTree(root.right);
+        return 1 + leftNodes + rightNodes;
+    }
+
     // ############################ Plumbing Code
     public static void main(String args[]) {
 
@@ -726,6 +761,7 @@ public class BinaryTreeTraversalsTUF {
         System.out.println(
                 "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(4)));
 
+        System.out.println("countNodesinCompleteBinaryTree ? ::==> " + bts.countNodesinCompleteBinaryTree(root));
         System.out.println("UDAY ====>");
     }
 
