@@ -483,9 +483,11 @@ public class BinaryTreeTraversalsTUF {
     static void rvRecursive(TreeNode root, Integer currDepth, List<Integer> res) {
         if (root == null)
             return;
+        // left or right capturing the element at size = depth:)
         if (currDepth == res.size()) {
             res.add(root.val);
         }
+        // to be noted here call recursively right and left for right view
         rvRecursive(root.right, currDepth + 1, res);
         rvRecursive(root.left, currDepth + 1, res);
     }
@@ -506,6 +508,7 @@ public class BinaryTreeTraversalsTUF {
                     q.offer(temp.left);
                 if (temp.right != null)
                     q.offer(temp.right);
+                // right view capture at size-1
                 if (i == (size - 1)) {
                     list.add(temp.val);
                 }
@@ -528,9 +531,11 @@ public class BinaryTreeTraversalsTUF {
     static void leftvRecursive(TreeNode root, Integer currDepth, List<Integer> res) {
         if (root == null)
             return;
+        // left or right capturing the element at size = depth:)
         if (currDepth == res.size()) {
             res.add(root.val);
         }
+        // to be noted here call recursively left and right for left view
         leftvRecursive(root.left, currDepth + 1, res);
         leftvRecursive(root.right, currDepth + 1, res);
     }
@@ -551,6 +556,7 @@ public class BinaryTreeTraversalsTUF {
                     q.offer(temp.left);
                 if (temp.right != null)
                     q.offer(temp.right);
+                // left view capture at 0 or beginning
                 if (i == (0)) {
                     list.add(temp.val);
                 }
@@ -585,12 +591,13 @@ public class BinaryTreeTraversalsTUF {
             return root;
         TreeNode left = lCARecursive(root.left, p, q);
         TreeNode right = lCARecursive(root.right, p, q);
-        if (left == null)
+        if (left == null) {
             return right;
-        else if (right == null)
+        } else if (right == null) {
             return left;
-        else
+        } else {
             return root;
+        }
 
     }
 
@@ -757,9 +764,9 @@ public class BinaryTreeTraversalsTUF {
         System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
         System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
 
-        System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(9), new TreeNode(2)));
+        System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(2), new TreeNode(3)));
         System.out.println(
-                "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(4)));
+                "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(3)));
 
         System.out.println("countNodesinCompleteBinaryTree ? ::==> " + bts.countNodesinCompleteBinaryTree(root));
         System.out.println("UDAY ====>");
@@ -783,7 +790,7 @@ public class BinaryTreeTraversalsTUF {
         root.left.left.right.right = new TreeNode(6);
         root.right = new TreeNode(3);
         root.right.left = new TreeNode(9);
-        root.right.right = new TreeNode(10);
+        root.right.right = new TreeNode(12);
 
         return root;
 
