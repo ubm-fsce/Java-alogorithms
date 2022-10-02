@@ -675,6 +675,10 @@ public class BinaryTreeTraversalsTUF {
                     q.offer(curr.right);
                     visited.put(curr.right, true);
                 }
+                if (parent_track.get(curr) != null && visited.get(parent_track.get(curr)) == null) {
+                    q.offer(parent_track.get(curr));
+                    visited.put(parent_track.get(curr), true);
+                }
             }
         }
         List<Integer> res = new ArrayList<>();
@@ -687,8 +691,20 @@ public class BinaryTreeTraversalsTUF {
 
     // ###### Minimum time takean to BURN the Binary tree from a Node
 
-    // ###### Count total nodes in a complete Binary Tree
+    /* Yet to complete */
 
+    // ###### Count total nodes in a complete Binary Tree recursive
+
+    static void inOrderTravRecusrise(TreeNode curr, int count[]) {
+        if (curr == null)
+            return;
+
+        count[0]++;
+        inOrderTravRecusrise(curr.left, count);
+        inOrderTravRecusrise(curr.right, count);
+    }
+
+    // ###### Count total nodes in a complete Binary Tree ITERATIVE
     public int getRightHeight(TreeNode root) {
         int count = 0;
         TreeNode curr = root;
