@@ -6,3 +6,15 @@
 /Java-algorithms.iml
 *.class
 .vscode
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/libraries/Maven__org_jetbrains_annotations_13_0.xml
+/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_7_20_RC.xml
+/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_7_20_RC.xml
+/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_7_20_RC.xml
+/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_7_20_RC.xml
+/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_test_1_7_20_RC.xml
+/.idea/jarRepositories.xml
+/.idea/jpa-buddy.xml
+/.idea/kotlinc.xml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml
