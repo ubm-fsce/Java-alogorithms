@@ -1,7 +1,5 @@
 package dsa.binarytree;
 
-import dsa.dependencies.TreeNode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +11,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
+
+import dsa.dependencies.TreeNode;
 
 public class BinaryTreeTraversalsTUF {
 
@@ -208,7 +208,7 @@ public class BinaryTreeTraversalsTUF {
     }
 
     public static int maxPathSum(TreeNode root) {
-        int maxpathsumArray[] = {Integer.MIN_VALUE};
+        int maxpathsumArray[] = { Integer.MIN_VALUE };
         maxPathSumRecursive(root, maxpathsumArray);
         return maxpathsumArray[0];
     }
@@ -653,7 +653,8 @@ public class BinaryTreeTraversalsTUF {
         return res;
     }
 
-    // ############################ Print all nodes at a distance K in Binary Tree Version 2
+    // ############################ Print all nodes at a distance K in Binary Tree
+    // Version 2
     private static void markParentsv2(TreeNode root, TreeNode par, Map<TreeNode, TreeNode> parent_track) {
         if (root != null) {
             parent_track.put(root, par);
@@ -663,9 +664,9 @@ public class BinaryTreeTraversalsTUF {
     }
 
     public static List<Integer> NodesAtdistanceKV2(TreeNode root, TreeNode target, int K) {
-        Map<TreeNode, TreeNode> parent_track = new HashMap();
+        Map<TreeNode, TreeNode> parent_track = new HashMap<>();
         markParentsv2(root, null, parent_track);
-        Queue<TreeNode> queue = new LinkedList();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(null);
         queue.add(target);
         Set<TreeNode> seen = new HashSet<>();
@@ -676,7 +677,7 @@ public class BinaryTreeTraversalsTUF {
             TreeNode node = queue.poll();
             if (node == null) {
                 if (dist == K) {
-                    List<Integer> ans = new ArrayList();
+                    List<Integer> ans = new ArrayList<>();
                     for (TreeNode n : queue)
                         ans.add(n.val);
                     return ans;
@@ -701,10 +702,11 @@ public class BinaryTreeTraversalsTUF {
         }
         return new ArrayList<Integer>();
     }
-    // ############################ Print all nodes at a distance K in Binary Tree Version 3
+    // ############################ Print all nodes at a distance K in Binary Tree
+    // Version 3
 
     public static List<Integer> NodesAtdistanceKV3(TreeNode root, TreeNode target, int k) {
-        List<Integer> ans = new LinkedList();
+        List<Integer> ans = new LinkedList<>();
         dfs(root, target, k, ans);
         return ans;
     }
@@ -720,11 +722,13 @@ public class BinaryTreeTraversalsTUF {
         } else {
             int L = dfs(node.left, target, k, ans), R = dfs(node.right, target, k, ans);
             if (L != -1) {
-                if (L == k) ans.add(node.val);
+                if (L == k)
+                    ans.add(node.val);
                 subtree_add(node.right, L + 1, k, ans);
                 return L + 1;
             } else if (R != -1) {
-                if (R == k) ans.add(node.val);
+                if (R == k)
+                    ans.add(node.val);
                 subtree_add(node.left, R + 1, k, ans);
                 return R + 1;
             } else {
@@ -735,7 +739,8 @@ public class BinaryTreeTraversalsTUF {
 
     // Add all nodes 'K - dist' from the node to answer.
     public static void subtree_add(TreeNode node, int dist, int k, List<Integer> ans) {
-        if (node == null) return;
+        if (node == null)
+            return;
         if (dist == k)
             ans.add(node.val);
         else {
@@ -746,7 +751,6 @@ public class BinaryTreeTraversalsTUF {
     // ###### Minimum time taken to BURN the Binary tree from a Node
 
     /* Yet to complete */
-
 
     // ###### Count total nodes in a complete Binary Tree recursive
 
@@ -791,57 +795,109 @@ public class BinaryTreeTraversalsTUF {
         return 1 + leftNodes + rightNodes;
     }
 
+    // ## Construct A Binary Tree from
+    // Inorder and Preorder Traversal
+    public static TreeNode buildBinaryTreefromInAndPre(int[] inOrder, int[] preOrder) {
+        Map<Integer, Integer> inMap = new HashMap<>();
+        for (int i = 0; i < inOrder.length; i++) {
+            inMap.put(inOrder[i], i);
+        }
+        TreeNode root = buildBinaryTreeInAndPreCore(inOrder, 0, inOrder.length - 1, preOrder, 0, preOrder.length - 1,
+                inMap);
+        return root;
+    }
+
+    public static TreeNode buildBinaryTreeInAndPreCore(int[] inOrder,
+            int inStart,
+            int inEnd,
+            int[] preOrder,
+            int preStart,
+            int preEnd,
+            Map<Integer, Integer> inMap) {
+
+        if (preStart > preEnd || inStart > inEnd)
+            return null;
+
+        TreeNode root = new TreeNode(preOrder[preStart]);
+        int inRoot = inMap.get(root.val);
+        int numsLeft = inRoot - inStart;
+
+        root.left = buildBinaryTreeInAndPreCore(inOrder, inStart, inRoot - 1,
+                preOrder, preStart + 1, preStart + numsLeft, inMap);
+        root.right = buildBinaryTreeInAndPreCore(inOrder, inRoot + 1, inEnd,
+                preOrder, preStart + numsLeft + 1, preEnd, inMap);
+
+        return root;
+    }
+
     // ############################ Plumbing Code
     public static void main(String args[]) {
         TreeNode root = getTree();
-//        TreeNode root1 = new TreeNode(1);
-//        root1.left = new TreeNode(2);
-//        TreeNode root2 = new TreeNode(1);
-//        root1.right = new TreeNode(2);
-//        ArrayList<Integer> inOrder;
-//        inOrder = inOrderIterativeTraversal(root);
-//        printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
-//        inOrderRecursiveTraversal(root, inOrder);
-//        printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
-//        preOrderIterativeTraversal(root);
-//        printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
-//        preOrderRecursiveTraversal(root, inOrder);
-//        printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
-//        postOrderRecursiveTraversal(root, inOrder);
-//        printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
-//        postOrderTwoStackTraversal(root);
-//        printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
-//        System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
-//        System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
-//
-//        System.out.println("isIdenticalTreesIterative ? ::==> " +
-//                isIdenticalTreesIterative(root1, root2));
-//        System.out.println("isIdenticalTreesRecursive ? ::==> " +
-//                isIdenticalTreesRecursive(root, getTree()));
-//        System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
-//        BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
-//
-//        System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
-//        System.out.println("topView ? ::==> " + topViewIterative(root));
-//        System.out.println("bottomViewIterative ? ::==> " + bottomViewIterative(root));
-//        System.out.println("isSymmetricRecursive ? ::==> " + bts.isSymmetricRecursive(root));
-//        System.out.println("isSymmetricIterative ? ::==> " + bts.isSymmetricIterative(root));
-//        System.out.println("rightSideViewRecursive ? ::==> " + bts.rightSideViewRecursive(root));
-//        System.out.println("rightSideViewItertaive ? ::==> " + bts.rightSideViewItertaive(root));
-//        System.out.println("leftSideViewRecursive ? ::==> " + bts.leftSideViewRecursive(root));
-//        System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
-//        System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
-//
-//        System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(2), new TreeNode(3)));
-//        System.out.println(
-//                "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(3)));
-//        System.out.println(
-//                " NodesAtdistanceK () ? ::==> " + NodesAtdistanceK(root, root.left.left, 1));
-//        System.out.println(
-//                " NodesAtdistanceKV2 () ? ::==> " + NodesAtdistanceKV2(root, root.left.left, 1));
-        System.out.println(
-                " NodesAtdistanceKV3 () ? ::==> " + NodesAtdistanceKV3(root, root.left.left, 1));
-//        System.out.println("countNodesinCompleteBinaryTree ? ::==> " + bts.countNodesinCompleteBinaryTree(root));
+        // TreeNode root1 = new TreeNode(1);
+        // root1.left = new TreeNode(2);
+        // TreeNode root2 = new TreeNode(1);
+        // root1.right = new TreeNode(2);
+        // ArrayList<Integer> inOrder;
+        // inOrder = inOrderIterativeTraversal(root);
+        // printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
+        // inOrderRecursiveTraversal(root, inOrder);
+        // printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
+        // preOrderIterativeTraversal(root);
+        // printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
+        // preOrderRecursiveTraversal(root, inOrder);
+        // printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
+        // postOrderRecursiveTraversal(root, inOrder);
+        // printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
+        // postOrderTwoStackTraversal(root);
+        // printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
+        // System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
+        // System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
+        //
+        // System.out.println("isIdenticalTreesIterative ? ::==> " +
+        // isIdenticalTreesIterative(root1, root2));
+        // System.out.println("isIdenticalTreesRecursive ? ::==> " +
+        // isIdenticalTreesRecursive(root, getTree()));
+        // System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
+        // BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
+        //
+        // System.out.println("verticalOrderTraversalIterative ? ::==> " +
+        // bts.verticalOrderTraversalIterative(root));
+        // System.out.println("topView ? ::==> " + topViewIterative(root));
+        // System.out.println("bottomViewIterative ? ::==> " +
+        // bottomViewIterative(root));
+        // System.out.println("isSymmetricRecursive ? ::==> " +
+        // bts.isSymmetricRecursive(root));
+        // System.out.println("isSymmetricIterative ? ::==> " +
+        // bts.isSymmetricIterative(root));
+        // System.out.println("rightSideViewRecursive ? ::==> " +
+        // bts.rightSideViewRecursive(root));
+        // System.out.println("rightSideViewItertaive ? ::==> " +
+        // bts.rightSideViewItertaive(root));
+        // System.out.println("leftSideViewRecursive ? ::==> " +
+        // bts.leftSideViewRecursive(root));
+        // System.out.println("leftSideViewItertaive ? ::==> " +
+        // bts.leftSideViewItertaive(root));
+        // System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
+        //
+        // System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new
+        // TreeNode(2), new TreeNode(3)));
+        // System.out.println(
+        // "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new
+        // TreeNode(2), new TreeNode(3)));
+        // System.out.println(
+        // " NodesAtdistanceK () ? ::==> " + NodesAtdistanceK(root, root.left.left, 1));
+        // System.out.println(
+        // " NodesAtdistanceKV2 () ? ::==> " + NodesAtdistanceKV2(root, root.left.left,
+        // 1));
+        // System.out.println(" NodesAtdistanceKV3 () ? ::==> " +
+        // NodesAtdistanceKV3(root, root.left.left, 1));
+
+        // System.out.println("countNodesinCompleteBinaryTree ? ::==> " +
+        // bts.countNodesinCompleteBinaryTree(root));
+        int preorder[] = { 10, 20, 40, 50, 30, 60 };
+        int inorder[] = { 40, 20, 50, 10, 60, 30 };
+        System.out.println("buildBinaryTreefromInAndPre () ? ::==> "
+                + buildBinaryTreefromInAndPre(inorder, preorder));
         System.out.println("UDAY ====>");
     }
 
