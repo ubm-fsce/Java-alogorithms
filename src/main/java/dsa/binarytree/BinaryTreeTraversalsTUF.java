@@ -788,8 +788,9 @@ public class BinaryTreeTraversalsTUF {
             return 0;
         int lh = getLeftHeight(root);
         int rh = getRightHeight(root);
-        if (lh == rh)
-            return (1 << lh) - 1;
+        if (lh == rh) {
+            return (1 << lh) - 1; // This is nothing but 1*(2^h)-1
+        }
         int leftNodes = countNodesinCompleteBinaryTree(root.left);
         int rightNodes = countNodesinCompleteBinaryTree(root.right);
         return 1 + leftNodes + rightNodes;
@@ -798,6 +799,8 @@ public class BinaryTreeTraversalsTUF {
     // ## Construct A Binary Tree from
     // Inorder and Preorder Traversal
     public static TreeNode buildBinaryTreefromInAndPre(int[] inOrder, int[] preOrder) {
+        if (inOrder == null || preOrder == null || inOrder.length != preOrder.length)
+            return null;
         Map<Integer, Integer> inMap = new HashMap<>();
         for (int i = 0; i < inOrder.length; i++) {
             inMap.put(inOrder[i], i);
@@ -830,74 +833,98 @@ public class BinaryTreeTraversalsTUF {
         return root;
     }
 
+    // ## Construct A Binary Tree from
+    // Inorder and Preorder Traversal
+    public static TreeNode buildTreeFromInAndPostOrder(int[] inOrder, int[] postOrder) {
+        if (inOrder == null || postOrder == null || inOrder.length != postOrder.length)
+            return null;
+        HashMap<Integer, Integer> inMap = new HashMap<>();
+        for (int i = 0; i < inOrder.length; i++) {
+            inMap.put(inOrder[i], i);
+        }
+        return buildTreeFromInAndPostOrderCoreLogic(inOrder, postOrder,
+                0, inOrder.length - 1,
+                0, postOrder.length - 1, inMap);
+    }
+
+    private static TreeNode buildTreeFromInAndPostOrderCoreLogic(int[] inOrder, int[] postOrder,
+            int inStart, int inEnd, int postStart, int postEnd, HashMap<Integer, Integer> inMap) {
+        if (postStart > postEnd || inStart > inEnd)
+            return null;
+        TreeNode root = new TreeNode(postOrder[postEnd]);
+        int rootIndex = inMap.get(postOrder[postEnd]);
+        int numsLeft = rootIndex - inStart;
+        root.left = buildTreeFromInAndPostOrderCoreLogic(inOrder, postOrder,
+                inStart, rootIndex - 1,
+                postStart, postStart + numsLeft - 1,
+                inMap);
+
+        root.right = buildTreeFromInAndPostOrderCoreLogic(inOrder, postOrder,
+                rootIndex + 1, inEnd,
+                (postStart + numsLeft), (postEnd - 1),
+                inMap);
+
+        return root;
+    }
+
     // ############################ Plumbing Code
     public static void main(String args[]) {
         TreeNode root = getTree();
-        // TreeNode root1 = new TreeNode(1);
-        // root1.left = new TreeNode(2);
-        // TreeNode root2 = new TreeNode(1);
-        // root1.right = new TreeNode(2);
-        // ArrayList<Integer> inOrder;
-        // inOrder = inOrderIterativeTraversal(root);
-        // printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
-        // inOrderRecursiveTraversal(root, inOrder);
-        // printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
-        // preOrderIterativeTraversal(root);
-        // printBinaryTree(inOrder, "PRE_ORDER", "ITERATIVE");
-        // preOrderRecursiveTraversal(root, inOrder);
-        // printBinaryTree(inOrder, "PRE_ORDER", "RECURSIVE");
-        // postOrderRecursiveTraversal(root, inOrder);
-        // printBinaryTree(inOrder, "POST_ORDER", "RECURSIVE");
-        // postOrderTwoStackTraversal(root);
-        // printBinaryTree(inOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
-        // System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
-        // System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
-        //
-        // System.out.println("isIdenticalTreesIterative ? ::==> " +
-        // isIdenticalTreesIterative(root1, root2));
-        // System.out.println("isIdenticalTreesRecursive ? ::==> " +
-        // isIdenticalTreesRecursive(root, getTree()));
-        // System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
-        // BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
-        //
-        // System.out.println("verticalOrderTraversalIterative ? ::==> " +
-        // bts.verticalOrderTraversalIterative(root));
-        // System.out.println("topView ? ::==> " + topViewIterative(root));
-        // System.out.println("bottomViewIterative ? ::==> " +
-        // bottomViewIterative(root));
-        // System.out.println("isSymmetricRecursive ? ::==> " +
-        // bts.isSymmetricRecursive(root));
-        // System.out.println("isSymmetricIterative ? ::==> " +
-        // bts.isSymmetricIterative(root));
-        // System.out.println("rightSideViewRecursive ? ::==> " +
-        // bts.rightSideViewRecursive(root));
-        // System.out.println("rightSideViewItertaive ? ::==> " +
-        // bts.rightSideViewItertaive(root));
-        // System.out.println("leftSideViewRecursive ? ::==> " +
-        // bts.leftSideViewRecursive(root));
-        // System.out.println("leftSideViewItertaive ? ::==> " +
-        // bts.leftSideViewItertaive(root));
-        // System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
-        //
-        // System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new
-        // TreeNode(2), new TreeNode(3)));
-        // System.out.println(
-        // "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new
-        // TreeNode(2), new TreeNode(3)));
-        // System.out.println(
-        // " NodesAtdistanceK () ? ::==> " + NodesAtdistanceK(root, root.left.left, 1));
-        // System.out.println(
-        // " NodesAtdistanceKV2 () ? ::==> " + NodesAtdistanceKV2(root, root.left.left,
-        // 1));
-        // System.out.println(" NodesAtdistanceKV3 () ? ::==> " +
-        // NodesAtdistanceKV3(root, root.left.left, 1));
 
-        // System.out.println("countNodesinCompleteBinaryTree ? ::==> " +
-        // bts.countNodesinCompleteBinaryTree(root));
+        TreeNode root1 = new TreeNode(1);
+        root1.left = new TreeNode(2);
+        TreeNode root2 = new TreeNode(1);
+        root1.right = new TreeNode(2);
+        // ## IN-ORDER TRAVERSALS
+        ArrayList<Integer> inOrder;
+        inOrder = inOrderIterativeTraversal(root);
+        printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
+        inOrder.clear();
+        inOrderRecursiveTraversal(root, inOrder);
+        printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
+        // ## PRE-ORDER TRAVERSALS
+        ArrayList<Integer> preOrder = preOrderIterativeTraversal(root);
+        printBinaryTree(preOrder, "PRE_ORDER", "ITERATIVE");
+        preOrder.clear();
+        preOrderRecursiveTraversal(root, preOrder);
+        printBinaryTree(preOrder, "PRE_ORDER", "RECURSIVE");
+        // ## POST-ORDER TRAVERSALS
+        ArrayList<Integer> postOrder = new ArrayList<>();
+        postOrderRecursiveTraversal(root, postOrder);
+        printBinaryTree(postOrder, "POST_ORDER", "RECURSIVE");
+        postOrder.clear();
+        postOrder = postOrderTwoStackTraversal(root);
+        printBinaryTree(postOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
+
+        System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
+        System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
+
+        System.out.println("isIdenticalTreesIterative ? ::==> " + isIdenticalTreesIterative(root1, root2));
+        System.out.println("isIdenticalTreesRecursive ? ::==>" + isIdenticalTreesRecursive(root, getTree()));
+        System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
+        BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
+        System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
+        System.out.println("topView ? ::==> " + topViewIterative(root));
+        System.out.println("bottomViewIterative ? ::==> " + bottomViewIterative(root));
+        System.out.println("isSymmetricRecursive ? ::==> " + bts.isSymmetricRecursive(root));
+        System.out.println("isSymmetricIterative ? ::==> " + bts.isSymmetricIterative(root));
+        System.out.println("rightSideViewRecursive ? ::==> " + bts.rightSideViewRecursive(root));
+        System.out.println("rightSideViewItertaive ? ::==> " + bts.rightSideViewItertaive(root));
+        System.out.println("leftSideViewRecursive ? ::==> " + bts.leftSideViewRecursive(root));
+        System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
+        System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
+
+        System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(2), new TreeNode(3)));
+        System.out.println(
+                "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(3)));
+
+        System.out.println(" NodesAtdistanceK () ? ::==> " + NodesAtdistanceK(root, root.left.left, 1));
+        System.out.println(" NodesAtdistanceKV2 () ? ::==> " + NodesAtdistanceKV2(root, root.left.left, 1));
+        System.out.println(" NodesAtdistanceKV3 () ? ::==> " + NodesAtdistanceKV3(root, root.left.left, 1));
+        System.out.println("countNodesinCompleteBinaryTree ? ::==> " + bts.countNodesinCompleteBinaryTree(root));
         int preorder[] = { 10, 20, 40, 50, 30, 60 };
         int inorder[] = { 40, 20, 50, 10, 60, 30 };
-        System.out.println("buildBinaryTreefromInAndPre () ? ::==> "
-                + buildBinaryTreefromInAndPre(inorder, preorder));
+        System.out.println("buildBinaryTreefromInAndPre () ? ::==> " + buildBinaryTreefromInAndPre(inorder, preorder));
         System.out.println("UDAY ====>");
     }
 
