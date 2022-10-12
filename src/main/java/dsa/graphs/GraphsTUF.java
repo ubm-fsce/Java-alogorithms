@@ -127,6 +127,34 @@ public class GraphsTUF {
     return false;
   }
 
+  // ### DFS BIPartite
+  static boolean checkBipartiteBFS(ArrayList<ArrayList<Integer>> adjList, int v) {
+    int color[] = new int[v];
+    Arrays.fill(color, -1);
+    for (int i = 0; i < v; i++) {
+      if (color[i] == -1) {
+        if (dfsBipartiteCheck(adjList, i, color)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  static boolean dfsBipartiteCheck(ArrayList<ArrayList<Integer>> adjList, int v, int color[]) {
+    for (Integer it : adjList.get(v)) {
+      if (color[it] == -1) {
+        color[it] = 1 - color[v];
+        if (!dfsBipartiteCheck(adjList, it, color)) {
+          return false;
+        } else if (color[it] == color[v]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   // ### Plumbing CODE ###
   public static void main(String args[]) {
     ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
@@ -149,10 +177,14 @@ public class GraphsTUF {
     System.out.println("3 : " + hasCycleBFS(5, adjList));
     // 4
     System.out.println("4 : " + hasCycleDFS(5, adjList));
+    // 5
+    System.out.println("5 : " + checkBipartiteBFS(adjList, 5));
   }
 
   static void printGraph(ArrayList<Integer> ans, String identifier) {
-    System.out.println(identifier + "########");
+    System.out.println(identifier);
+    System.out.println("--------- ");
+
     for (int i = 0; i < ans.size(); i++) {
       System.out.println(ans.get(i));
     }
