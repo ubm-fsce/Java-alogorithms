@@ -65,15 +65,14 @@ public class GraphsTUF {
   // 3. Cycle Detection in Undirected Graph using bfs
   static boolean hasCycleBFS(int v, ArrayList<ArrayList<Integer>> adjList) {
     boolean visited[] = new boolean[v];
-    Arrays.fill(visited, false);
+    // Arrays.fill(visited, false); no need as booelan array defaults to false.
+    // Note :Object (Boolean)defautls to null and boolean defaults to false.
     for (int i = 0; i < v; i++) {
       if (visited[i] == false) {
         if (checkforCycle(adjList, i, visited)) {
           return true;
         }
-
       }
-
     }
     return false;
   }
@@ -102,7 +101,7 @@ public class GraphsTUF {
   public static boolean hasCycleDFS(int v, ArrayList<ArrayList<Integer>> adjList) {
     boolean visited[] = new boolean[v];
 
-    Arrays.fill(visited, false);
+    // Arrays.fill(visited, false);
     visited[0] = true;
     Pair cpair = new Pair(0, -1);
     if (dfshasCycleCheck(cpair, adjList, visited)) {
