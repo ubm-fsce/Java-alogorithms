@@ -100,7 +100,6 @@ public class GraphsTUF {
   // 4. Cycle Detection in Undirected Graph using DFS
   public static boolean hasCycleDFS(int v, ArrayList<ArrayList<Integer>> adjList) {
     boolean visited[] = new boolean[v];
-
     // Arrays.fill(visited, false);
     visited[0] = true;
     Pair cpair = new Pair(0, -1);
@@ -127,7 +126,7 @@ public class GraphsTUF {
   }
 
   // ### DFS BIPartite
-  static boolean checkBipartiteBFS(ArrayList<ArrayList<Integer>> adjList, int v) {
+  static boolean checkBipartiteDFS(ArrayList<ArrayList<Integer>> adjList, int v) {
     int color[] = new int[v];
     Arrays.fill(color, -1);
     for (int i = 0; i < v; i++) {
@@ -140,6 +139,7 @@ public class GraphsTUF {
     return true;
   }
 
+  // ### DFS BIPartite
   static boolean dfsBipartiteCheck(ArrayList<ArrayList<Integer>> adjList, int v, int color[]) {
     for (Integer it : adjList.get(v)) {
       if (color[it] == -1) {
@@ -147,6 +147,40 @@ public class GraphsTUF {
         if (!dfsBipartiteCheck(adjList, it, color)) {
           return false;
         } else if (color[it] == color[v]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // ### BFS BIPartite
+  public static boolean isBipartiteBFS(ArrayList<ArrayList<Integer>> adjList, int v) {
+    int color[] = new int[v];
+    Arrays.fill(color, -1);
+    for (int i = 0; i < v; i++) {
+      if (color[i] == -1) {
+        if (!bipartiteBfsCheck(adjList, i, v, color)) {
+          return false;
+        }
+      }
+    }
+    return true;
+
+  }
+
+  private static boolean bipartiteBfsCheck(ArrayList<ArrayList<Integer>> adjList,
+      int start, int v, int[] color) {
+    Queue<Integer> que = new LinkedList<>();
+    que.add(start);
+    color[start] = 0;
+    while (!que.isEmpty()) {
+      int node = que.poll();
+      for (int it : adjList.get(node)) {
+        if (color[it] == -1) {
+          color[it] = 1 - color[node];
+          que.add(it);
+        } else if (color[it] == color[node]) {
           return false;
         }
       }
@@ -177,7 +211,9 @@ public class GraphsTUF {
     // 4
     System.out.println("4 : " + hasCycleDFS(5, adjList));
     // 5
-    System.out.println("5 : " + checkBipartiteBFS(adjList, 5));
+    System.out.println("5 : " + checkBipartiteDFS(adjList, 5));
+    // 5
+    System.out.println("6 : " + isBipartiteBFS(adjList, 5));
   }
 
   static void printGraph(ArrayList<Integer> ans, String identifier) {
