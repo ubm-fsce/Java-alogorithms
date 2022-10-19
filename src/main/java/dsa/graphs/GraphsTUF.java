@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 class Pair {
   int first;
@@ -125,7 +126,7 @@ public class GraphsTUF {
     return false;
   }
 
-  // ### DFS BIPartite
+  // ### 5. DFS BIPartite
   static boolean checkBipartiteDFS(ArrayList<ArrayList<Integer>> adjList, int v) {
     int color[] = new int[v];
     Arrays.fill(color, -1);
@@ -139,7 +140,6 @@ public class GraphsTUF {
     return true;
   }
 
-  // ### DFS BIPartite
   static boolean dfsBipartiteCheck(ArrayList<ArrayList<Integer>> adjList, int v, int color[]) {
     for (Integer it : adjList.get(v)) {
       if (color[it] == -1) {
@@ -154,7 +154,7 @@ public class GraphsTUF {
     return true;
   }
 
-  // ### BFS BIPartite
+  // ### 6.BFS BIPartite
   public static boolean isBipartiteBFS(ArrayList<ArrayList<Integer>> adjList, int v) {
     int color[] = new int[v];
     Arrays.fill(color, -1);
@@ -188,6 +188,101 @@ public class GraphsTUF {
     return true;
   }
 
+  // ### 7. detect a cycle in Directed graph
+  public static boolean isDirectedCyclic(int v, ArrayList<ArrayList<Integer>> adjList) {
+    int visited[] = new int[v];
+    int pathVisited[] = new int[v];
+    // Arrays.fill is not reqiured as default Array Initialisation takes care of
+    // adding 0's
+    for (int i = 0; i < v; i++) {
+      if (visited[i] == 0) {
+        if (hasCycleInDAG(i, visited, pathVisited, adjList) == true) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private static boolean hasCycleInDAG(int i, int[] visited, int[] pathVisited,
+      ArrayList<ArrayList<Integer>> adjList) {
+    visited[i] = 1;
+    pathVisited[i] = 1;
+    for (int it : adjList.get(i)) {
+      if (visited[i] == 0) {
+        if (hasCycleInDAG(it, visited, pathVisited, adjList) == true) {
+          return true;
+        } else if (pathVisited[it] == 1) {
+          return true;
+        }
+      }
+    }
+    pathVisited[i] = 0;
+    return false;
+  }
+
+  // ### 8.TopoSort using DFS
+  public static int[] dfsToposort(int v, ArrayList<ArrayList<Integer>> adjList) {
+    int[] visited = new int[v];
+    Stack<Integer> stack = new Stack<>();
+    for (int i = 0; i < v; i++) {
+      if (visited[i] == 0) {
+        getToposortwithDfs(i, visited, stack, adjList);
+      }
+    }
+    return getArrayFromStack(stack);
+  }
+
+  private static void getToposortwithDfs(int i, int[] visited, Stack<Integer> stack,
+      ArrayList<ArrayList<Integer>> adjList) {
+    visited[i] = 1;
+    for (int it : adjList.get(i)) {
+      if (visited[it] == 0) {
+        getToposortwithDfs(it, visited, stack, adjList);
+      }
+    }
+    stack.push(i);
+  }
+
+  private static int[] getArrayFromStack(Stack<Integer> stack) {
+    int topoSortedArray[] = new int[stack.size()];
+    int ind = 0;
+    while (!stack.isEmpty()) {
+      topoSortedArray[ind++] = stack.pop();
+    }
+    return topoSortedArray;
+  }
+
+  // 9. Topological Sort BFS Kahn's Alogrithm
+  public static int[] toposortDfs(int v, ArrayList<ArrayList<Integer>> adjList) {
+    int[] topo = new int[v], inDegree = new int[v];
+
+    Queue<Integer> que = new LinkedList<>();
+    // populate indegree array
+    for (int i = 0; i < v; i++) {
+      for (int it : adjList.get(i)) {
+        inDegree[it]++;
+      }
+    }
+    for (int i = 0; i < v; i++) {
+      if (inDegree[i] == 0) {
+        que.add(i);
+      }
+    }
+    int ind = 0;
+    while (!que.isEmpty()) {
+      Integer node = que.poll();
+      topo[ind++] = node;
+      for (Integer it : adjList.get(node)) {
+        inDegree[it]--;
+        if (inDegree[it] == 0) {
+          que.add(it);
+        }
+      }
+    }
+    return topo;
+  }
+
   // ### Plumbing CODE ###
   public static void main(String args[]) {
     ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
@@ -207,23 +302,34 @@ public class GraphsTUF {
     // 2
     printGraph(dfsOfGraph(5, adjList), "2. DFS Graph Traversal");
     // 3
-    System.out.println("3 : " + hasCycleBFS(5, adjList));
+    System.out.println("3 : hasCycleBFS : " + hasCycleBFS(5, adjList));
     // 4
-    System.out.println("4 : " + hasCycleDFS(5, adjList));
+    System.out.println("4 : hasCycle DFS " + hasCycleDFS(5, adjList));
     // 5
-    System.out.println("5 : " + checkBipartiteDFS(adjList, 5));
+    System.out.println("5 : checkBipartite DFS ? : " + checkBipartiteDFS(adjList, 5));
     // 5
-    System.out.println("6 : " + isBipartiteBFS(adjList, 5));
+    System.out.println("6 : isBipartiteBFS ? : " + isBipartiteBFS(adjList, 5));
+    // 7
+    System.out.println("7 : DirectedCyclic DFS ? : " + isDirectedCyclic(5, adjList));
+    // 8
+    System.out.println("8 : TOPOSORT DFS  : " + Arrays.toString(dfsToposort(5, adjList)));
+    // 9
+    System.out.println("9 : TOPOSORT BFS  Kahn's Algorithm : " + Arrays.toString(dfsToposort(5, adjList)));
   }
 
   static void printGraph(ArrayList<Integer> ans, String identifier) {
     System.out.println(identifier);
-    System.out.println("--------- ");
-
     for (int i = 0; i < ans.size(); i++) {
-      System.out.println(ans.get(i));
+
+      if (i != (ans.size() - 1)) {
+        System.out.print(ans.get(i));
+        System.out.print(" => ");
+      } else {
+        System.out.println(ans.get(i));
+      }
+
     }
-    System.out.println("---------");
+    System.out.println("------------------");
   }
 
 }
