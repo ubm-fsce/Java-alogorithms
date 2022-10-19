@@ -322,8 +322,7 @@ public class GraphsTUF {
     for (int i = 0; i < ans.size(); i++) {
 
       if (i != (ans.size() - 1)) {
-        System.out.print(ans.get(i));
-        System.out.print(" => ");
+        System.out.print(ans.get(i) + " => ");
       } else {
         System.out.println(ans.get(i));
       }
