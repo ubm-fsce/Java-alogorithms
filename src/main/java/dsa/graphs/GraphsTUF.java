@@ -318,7 +318,7 @@ public class GraphsTUF {
   }
 
   static void printGraph(ArrayList<Integer> ans, String identifier) {
-    System.out.println(identifier);
+    System.out.print(identifier + " : ");
     for (int i = 0; i < ans.size(); i++) {
 
       if (i != (ans.size() - 1)) {
@@ -329,7 +329,6 @@ public class GraphsTUF {
       }
 
     }
-    System.out.println("------------------");
   }
 
 }
