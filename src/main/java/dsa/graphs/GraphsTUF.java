@@ -283,6 +283,37 @@ public class GraphsTUF {
     return topo;
   }
 
+  // 10. Cycle detection in DAG kahn's Algorithm
+  public static boolean isDAGCylicBFS(int v, ArrayList<ArrayList<Integer>> adjList) {
+    int[] indegree = new int[v];
+    for (int i = 0; i < v; i++) {
+      for (Integer it : adjList.get(i)) {
+        indegree[it]++;
+      }
+    }
+    Queue<Integer> que = new LinkedList<>();
+    for (int i = 0; i < v; i++) {
+      if (indegree[i] == 0) {
+        que.add(i);
+      }
+    }
+
+    int count = 0;
+    while (!que.isEmpty()) {
+      Integer node = que.poll();
+      count++;
+      for (Integer it : adjList.get(node)) {
+        indegree[it]--;
+        if (indegree[it] == 0) {
+          que.add(it);
+        }
+      }
+
+    }
+    return (count == v) ? false : true;
+
+  }
+
   // ### Plumbing CODE ###
   public static void main(String args[]) {
     ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
@@ -315,19 +346,20 @@ public class GraphsTUF {
     System.out.println("8 : TOPOSORT DFS  : " + Arrays.toString(dfsToposort(5, adjList)));
     // 9
     System.out.println("9 : TOPOSORT BFS  Kahn's Algorithm : " + Arrays.toString(dfsToposort(5, adjList)));
+    // 10
+    System.out.println("10 : isDAGCylicBFS TOPOSORT  Kahn's Algorithm : " + isDAGCylicBFS(5, adjList));
+
   }
 
   static void printGraph(ArrayList<Integer> ans, String identifier) {
     System.out.print(identifier + " : ");
     for (int i = 0; i < ans.size(); i++) {
-
       if (i != (ans.size() - 1)) {
         System.out.print(ans.get(i) + " => ");
       } else {
         System.out.println(ans.get(i));
       }
-
-    }
+    }~
   }
 
 }
