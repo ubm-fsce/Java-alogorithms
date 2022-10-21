@@ -17,6 +17,17 @@ class Pair {
 
 }
 
+class PairWithDistance {
+  int node;
+  int distance;
+
+  public PairWithDistance(int node, int distance) {
+    this.node = node;
+    this.distance = distance;
+  }
+
+}
+
 public class GraphsTUF {
   // 1. bfsOfGraph
   public static ArrayList<Integer> bfsOfGraph(int v, ArrayList<ArrayList<Integer>> adjList) {
@@ -314,6 +325,26 @@ public class GraphsTUF {
 
   }
 
+  // ### 11. Shortest Path in Undirected Graph with Unit Weights DFS
+  public static Integer[] shortestPathUndirectGraph(int v, ArrayList<ArrayList<Integer>> adjList, int src) {
+    Integer dist[] = new Integer[v];
+    Arrays.fill(dist, Integer.MAX_VALUE);
+    Queue<PairWithDistance> que = new LinkedList<>();
+    dist[src] = 0;
+    que.add(new PairWithDistance(0, 0));
+    while (!que.isEmpty()) {
+      PairWithDistance pwd = que.poll();
+      for (Integer it : adjList.get(pwd.node)) {
+        int tempdist = pwd.distance + 1;
+        if (tempdist < dist[it]) {
+          que.add(new PairWithDistance(it, pwd.distance++));
+          dist[it] = tempdist;
+        }
+      }
+    }
+    return dist;
+  }
+
   // ### Plumbing CODE ###
   public static void main(String args[]) {
     ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
@@ -348,7 +379,10 @@ public class GraphsTUF {
     System.out.println("9 : TOPOSORT BFS  Kahn's Algorithm : " + Arrays.toString(dfsToposort(5, adjList)));
     // 10
     System.out.println("10 : isDAGCylicBFS TOPOSORT  Kahn's Algorithm : " + isDAGCylicBFS(5, adjList));
-
+    // 11.
+    System.out.println(
+        "11 : Shortest Path in Undirected Graph with Unit Weights DFS : "
+            + Arrays.toString(shortestPathUndirectGraph(5, adjList, 0)));
   }
 
   static void printGraph(ArrayList<Integer> ans, String identifier) {
@@ -359,7 +393,7 @@ public class GraphsTUF {
       } else {
         System.out.println(ans.get(i));
       }
-    }~
+    }
   }
 
 }
