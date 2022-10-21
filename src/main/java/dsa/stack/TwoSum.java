@@ -9,9 +9,13 @@ public class TwoSum {
         int[] a = { 3, 2, 4, 6, 5, 9, 7, 1 };
         Arrays.sort(a);
         int target = 14;
-        // int result[] = twoSumBF(a, target);
-        int result[] = twoSum3(a, target);
-        System.out.println(" i: " + result[0] + " j : " + result[1]);
+        int result[] = twoSumBF(a, target);
+        System.out.println("twoSumBF | num 1: " + result[0] + " num 2 : " + result[1]);
+        result = twoSum3(a, target);
+        System.out.println("twoSum3 | num 1: " + result[0] + " num 2 : " + result[1]);
+        result = twoSumHashMap(a, target);
+        System.out.println("twoSumHashMap | num 1: " + result[0] + " num 2 : " + result[1]);
+
     }
 
     private static int[] twoSumBF(int[] a, int target) {

@@ -71,7 +71,7 @@ public class MaximumElementInMinHeap {
         h.insertKey(22);
 
         // Print all nodes smaller than 100.
-        int x = 100;
+        // int x = 100;
         System.out.println(h.getMaxElementInMinHeap());
     }
 }

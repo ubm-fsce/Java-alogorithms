@@ -9,7 +9,6 @@ public class TreeNode {
     public int val;
     public String valStr;
 
-
     public TreeNode() {
     }
 
@@ -24,11 +23,9 @@ public class TreeNode {
     }
 
     public TreeNode(int key, String valstr) {
-        this.val = val;
+        this.val = key;
         this.valStr = valstr;
 
     }
-
-
 
 }

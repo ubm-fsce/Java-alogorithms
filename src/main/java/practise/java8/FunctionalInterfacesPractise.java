@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.function.BinaryOperator;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -16,14 +14,15 @@ public class FunctionalInterfacesPractise {
     private static final String SEPARATOR = "==================================== | ";
 
     public static void main(String[] args) {
-        List<String> courses = List.of("Spring", "Spring Boot", "API", "Microservices", "AWS", "PCF", "Azure", "Docker", "Kubernetes");
+        List<String> courses = List.of("Spring", "Spring Boot", "API", "Microservices", "AWS", "PCF", "Azure", "Docker",
+                "Kubernetes");
 
         Predicate<? super Integer> evenPredicate = x -> x % 2 == 0;
-        Predicate<? super Integer> predicate = x -> x % 2 == 1;
-        Function<Integer, Integer> squareFunction = x -> x * x;
-        Function<Integer, String> stringFunction = x -> x + "" + x;
-        Consumer<Integer> sysOutConsumer = x -> System.out.println(x);
-        BinaryOperator<Integer> sumTwoVariables = (x, y) -> x + y;
+        // Predicate<? super Integer> predicate = x -> x % 2 == 1;
+        // Function<Integer, Integer> squareFunction = x -> x * x;
+        // Function<Integer, String> stringFunction = x -> x + "" + x;
+        // Consumer<Integer> sysOutConsumer = x -> System.out.println(x);
+        // BinaryOperator<Integer> sumTwoVariables = (x, y) -> x + y;
         UnaryOperator<Integer> getTriplevalue = x -> x * 3;
 
         Supplier<Integer> randomIntegerSupplier = () -> {
@@ -66,7 +65,7 @@ public class FunctionalInterfacesPractise {
         System.out.println(SEPARATOR + "Using custom static method ");
         courses.stream().map(str -> str.toUpperCase()).forEach(FunctionalInterfacesPractise::printMe);
         courses.stream().map(String::toUpperCase).forEach(FunctionalInterfacesPractise::printMe);
-        Supplier<String> supplier = String::new;  // Constructor references
+        // Supplier<String> supplier = String::new; // Constructor references
     }
 
     private static void filterAndPrint(Predicate<? super Integer> predicate, List<Integer> numbers) {

@@ -2,10 +2,6 @@ package dsa.stack;
 
 public class PalindromeNumber {
 
-    public static void main(String[] args) {
-        System.out.println("is Palindrome : " + isPalindrome2(335633));
-    }
-
     private static boolean isPalindrome2(int x) {
         int num = 0, temp = x;
         while (x > 0) {
@@ -27,4 +23,8 @@ public class PalindromeNumber {
         return x == revertedNumber || x == revertedNumber / 10;
     }
 
+    public static void main(String[] args) {
+        System.out.println("is Palindrome : " + isPalindrome(335633));
+        System.out.println("is isPalindrome2 : " + isPalindrome2(335633));
+    }
 }

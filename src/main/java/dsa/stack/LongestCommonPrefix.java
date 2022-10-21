@@ -3,12 +3,15 @@ package dsa.stack;
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {
-        LongestCommonPrefix longestCommonPrefix = new LongestCommonPrefix();
+
         String[] str = { "flower", "flow", "flight", "fight" };
-        System.out.println("longestCommonPrefixBS() : " + longestCommonPrefix.longestCommonPrefixBS(str));
+        System.out.println("longestCommonPrefix() : " + longestCommonPrefix(str));
+        System.out.println("longestCommonPrefixBS() : " + longestCommonPrefixBS(str));
+        System.out.println("longestCommonPrefix2() : " + longestCommonPrefix2(str));
+
     }
 
-    private String longestCommonPrefix(String[] strs) {
+    private static String longestCommonPrefix(String[] strs) {
         String longestCommnprfx = "";
         int index = 0;
         for (char c : strs[0].toCharArray()) {
@@ -36,7 +39,7 @@ public class LongestCommonPrefix {
     }
 
     // Seems Most Efficient
-    public String longestCommonPrefixBS(String[] strs) {
+    public static String longestCommonPrefixBS(String[] strs) {
         int start = 0;
         // First we find the length of the shortest string
         int end = minString(strs) - 1;
@@ -68,7 +71,7 @@ public class LongestCommonPrefix {
         return substr;
     }
 
-    private int minString(String[] strs) {
+    private static int minString(String[] strs) {
         int min = strs[0].length();
         for (String s : strs) {
             if (s.length() < min)

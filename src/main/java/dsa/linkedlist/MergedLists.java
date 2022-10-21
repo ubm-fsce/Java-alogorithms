@@ -5,13 +5,19 @@ import dsa.dependencies.ListNode;
 public class MergedLists {
 
     public static void main(String[] args) {
-        MergedLists ml = new MergedLists();
+
         ListNode l1 = new ListNode();
         ListNode l2 = new ListNode();
+        ListNode mergedListNode = mergeTwoLists(l1, l2);
+
+        while (mergedListNode.next != null) {
+            System.out.print(mergedListNode.next.val);
+            mergedListNode = mergedListNode.next;
+        }
 
     }
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         // maintain an unchanging reference to node ahead of the return node.
         ListNode prehead = new ListNode(-1);
         ListNode prev = prehead;

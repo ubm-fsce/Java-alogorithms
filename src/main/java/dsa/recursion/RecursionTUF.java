@@ -1,20 +1,22 @@
 package dsa.recursion;
 
+import java.util.Arrays;
+
 public class RecursionTUF {
 
     public static void main(String[] args) {
         RecursionTUF r = new RecursionTUF();
         int[] array = { 1, 2, 3, 4, 5, 6 };
         String str = "MADAAM";
-        // r.printNameNtimes(0,"Uday", 5);
-        // r.print1toN(0,5);
-        // r.printNto1(0,5);
-        // System.out.println(r.sumNnumsParameterised(5, 0));
-        // System.out.println(r.functionalSumNnums(6));
-        // System.out.println(Arrays.toString(r.reverseArray( array, 0,
-        // array.length-1)));
-        // System.out.println(Arrays.toString(r.swapUsingsinglePointer( array, 0)));
-        // System.out.println(r.isPalindrome(str, 0));
+        r.printNameNtimes(0, "Uday", 5);
+        r.print1toN(0, 5);
+        r.printNto1(0, 5);
+        System.out.println(r.sumNnumsParameterised(5, 0));
+        System.out.println(r.functionalSumNnums(6));
+        System.out.println(Arrays.toString(r.reverseArray(array, 0,
+                array.length - 1)));
+        System.out.println(Arrays.toString(r.swapUsingsinglePointer(array, 0)));
+        System.out.println(r.isPalindrome(str, 0));
         System.out.println(r.fibonocciNumber(10));
 
     }
