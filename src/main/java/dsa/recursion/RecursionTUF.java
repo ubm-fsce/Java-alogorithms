@@ -1,94 +1,69 @@
+package dsa.recursion;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class RecursionTUF {
 
-    public static void main(String[] args) {
-        RecursionTUF r = new RecursionTUF();
-        int[] array = { 1, 2, 3, 4, 5, 6 };
-        String str = "MADAAM";
-        r.printNameNtimes(0, "Uday", 5);
-        r.print1toN(0, 5);
-        r.printNto1(0, 5);
-        System.out.println(r.sumNnumsParameterised(5, 0));
-        System.out.println(r.functionalSumNnums(6));
-        System.out.println(Arrays.toString(r.reverseArray(array, 0,
-                array.length - 1)));
-        System.out.println(Arrays.toString(r.swapUsingsinglePointer(array, 0)));
-        System.out.println(r.isPalindrome(str, 0));
-        System.out.println(r.fibonocciNumber(10));
-
-    }
-
-    public void printNameNtimes(int i, String name, int n) {
-        if (i >= n)
+    public static void subSequenceSum(
+            ArrayList<ArrayList<Integer>> ans,
+            int a[], ArrayList<Integer> temp,
+            int k, int start) {
+        System.out.println(" k " + k + " : start : " + start + " temp : " + temp);
+        if (start == a.length || k <= 0) {
+            if (k == 0) {
+                ans.add(
+                        new ArrayList<Integer>(temp));
+                return;
+            }
             return;
-        System.out.println(i + " : " + name);
-        printNameNtimes(
-                ++i, name, n);
+        } else {
+
+            temp.add(a[start]);
+            subSequenceSum(ans, a,
+                    temp, k - a[start], start + 1);
+            temp.remove(temp.size() - 1);
+            subSequenceSum(ans, a,
+                    temp, k - a[start], start + 1);
+
+        }
     }
 
-    public void print1toN(int i, int n) {
-        if (i >= n)
-            return;
-        System.out.println(++i);
-        print1toN(i, n);
-    }
+    // public static void printSubsequences(int[] arr, int index,
+    // ArrayList<Integer> path) {
 
-    public void printNto1(int i, int n) {
-        if (i >= n)
-            return;
-        printNto1(++i, n);
-        System.out.println(i);
-    }
+    // if (index == arr.length) {
+    // if (path.size() > 0)
+    // System.out.println(path);
+    // } else {
+    // printSubsequences(arr, index + 1, path);
+    // path.add(arr[index]);
+    // printSubsequences(arr, index + 1, path);
+    // path.remove(path.size() - 1);
+    // }
+    // return;
+    // }
 
-    int sumNnumsParameterised(int n, int sum) {
-        if (n == 0)
-            return sum;
-        return sumNnumsParameterised(n - 1, sum + n);
-    }
-
-    int functionalSumNnums(int n) {
-        if (n == 0)
-            return 0;
-        return n + functionalSumNnums(n - 1);
-    }
-
-    int[] reverseArray(int[] array, int left, int right) {
-        if (left > right)
-            return array;
-        swapArray(array, left, right);
-        return reverseArray(array, ++left, --right);
-    }
-
-    void swapArray(int[] array, int left, int right) {
-        int temp = array[left];
-        array[left] = array[right];
-        array[right] = temp;
-    }
-
-    int[] swapUsingsinglePointer(int[] array, int p) {
-        if (p > array.length / 2)
-            return array;
-        swapArray(array, p, array.length - 1 - p);
-        return swapUsingsinglePointer(array, ++p);
-    }
-
-    boolean isPalindrome(String str, int index) {
-        if (index > str.length() / 2)
-            return true;
-        if (str.charAt(index) != str.charAt(str.length() - 1 - index))
-            return false;
-        return isPalindrome(str, ++index);
-    }
-
-    // Multiple Recursinon Calls
-    int fibonocciNumber(int n) {
-        if (n <= 1)
-            return n;
-        int last = fibonocciNumber(n - 1);
-        int sLast = fibonocciNumber(n - 1);
-        return last + sLast;
+    // Driver Code
+    public static void main(String args[]) {
+        int arr[] = { 5, 1, 3, 2 };
+        int k = 6;
+        ArrayList<ArrayList<Integer>> ans;
+        ans = new ArrayList<ArrayList<Integer>>();
+        subSequenceSum(ans, arr,
+                new ArrayList<Integer>(), k, 0);
+        System.out.println(" Size : " + ans.size());
+        // Loop to print the subsequences
+        for (int i = 0; i < ans.size(); i++) {
+            for (int j = 0; j < ans.get(i).size(); j++) {
+                System.out.print(ans.get(i).get(j));
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        // Auxiliary space to store each path
+        System.out.println("=====================printSubsequences==============");
+        ArrayList<Integer> path = new ArrayList<>();
+        // printSubsequences(arr, 0, path);
 
     }
 }

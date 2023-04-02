@@ -22,6 +22,7 @@ public class DutchNationalFlag {
         c.add(Color.white);
         c.add(Color.white);
         c.add(Color.red);
+
         List<Color> clrs = dutchFlagPartition(Color.white.ordinal(), c);
         System.out.println(clrs);
     }

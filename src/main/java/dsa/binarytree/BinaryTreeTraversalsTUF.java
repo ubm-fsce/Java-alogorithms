@@ -130,6 +130,7 @@ public class BinaryTreeTraversalsTUF {
             } else if (it.num == 2) {
                 in.add(it.TreeNode.val);
                 it.num++;
+                st.push(it);
                 st.push(new Pair(it.TreeNode.right, 1));
             } else {
                 post.add(it.TreeNode.val);
@@ -138,7 +139,7 @@ public class BinaryTreeTraversalsTUF {
     }
     // ############################ Maximum depth of a Binary Tree
 
-    int depthofTreeIterative(TreeNode root) {
+    int maxDepthofTreeIterative(TreeNode root) {
         if (root == null)
             return 0;
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
@@ -158,11 +159,11 @@ public class BinaryTreeTraversalsTUF {
         return level;
     }
 
-    int depthOfTreeRecursive(TreeNode root) {
+    int maxDepthOfTreeRecursive(TreeNode root) {
         if (root == null)
             return 0;
-        int lh = depthOfTreeRecursive(root.left);
-        int rh = depthOfTreeRecursive(root.right);
+        int lh = maxDepthOfTreeRecursive(root.left);
+        int rh = maxDepthOfTreeRecursive(root.right);
         return 1 + Math.max(lh, rh);
     }
     // ############################ Check is Binary Tree balanced ??
@@ -314,10 +315,10 @@ public class BinaryTreeTraversalsTUF {
         Queue<Tuple> q = new LinkedList<Tuple>();
         q.offer(new Tuple(root, 0, 0));
         while (!q.isEmpty()) {
-            Tuple t = q.poll();
-            TreeNode TreeNode = t.TreeNode;
-            int r = t.row;
-            int c = t.column;
+            Tuple tuple = q.poll();
+            TreeNode TreeNode = tuple.TreeNode;
+            int r = tuple.row;
+            int c = tuple.column;
             if (!treemap.containsKey(r)) {
                 treemap.put(r, new TreeMap<>());
             }
@@ -482,8 +483,8 @@ public class BinaryTreeTraversalsTUF {
             int size = q.size();
             for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
-                if (temp.left != null)
-                    q.offer(temp.left);
+
+                q.offer(temp.left);
                 if (temp.right != null)
                     q.offer(temp.right);
                 // right view capture at size-1
@@ -664,6 +665,8 @@ public class BinaryTreeTraversalsTUF {
     }
 
     public static List<Integer> NodesAtdistanceKV2(TreeNode root, TreeNode target, int K) {
+        String str = "";
+
         Map<TreeNode, TreeNode> parent_track = new HashMap<>();
         markParentsv2(root, null, parent_track);
         Queue<TreeNode> queue = new LinkedList<>();
@@ -867,87 +870,216 @@ public class BinaryTreeTraversalsTUF {
         return root;
     }
 
-    // ############################ Plumbing Code
-    public static void main(String args[]) {
-        TreeNode root = getTree();
-
-        TreeNode root1 = new TreeNode(1);
-        root1.left = new TreeNode(2);
-        TreeNode root2 = new TreeNode(1);
-        root1.right = new TreeNode(2);
-        // ## IN-ORDER TRAVERSALS
-        ArrayList<Integer> inOrder;
-        inOrder = inOrderIterativeTraversal(root);
-        printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
-        inOrder.clear();
-        inOrderRecursiveTraversal(root, inOrder);
-        printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
-        // ## PRE-ORDER TRAVERSALS
-        ArrayList<Integer> preOrder = preOrderIterativeTraversal(root);
-        printBinaryTree(preOrder, "PRE_ORDER", "ITERATIVE");
-        preOrder.clear();
-        preOrderRecursiveTraversal(root, preOrder);
-        printBinaryTree(preOrder, "PRE_ORDER", "RECURSIVE");
-        // ## POST-ORDER TRAVERSALS
-        ArrayList<Integer> postOrder = new ArrayList<>();
-        postOrderRecursiveTraversal(root, postOrder);
-        printBinaryTree(postOrder, "POST_ORDER", "RECURSIVE");
-        postOrder.clear();
-        postOrder = postOrderTwoStackTraversal(root);
-        printBinaryTree(postOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
-
-        System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
-        System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
-
-        System.out.println("isIdenticalTreesIterative ? ::==> " + isIdenticalTreesIterative(root1, root2));
-        System.out.println("isIdenticalTreesRecursive ? ::==>" + isIdenticalTreesRecursive(root, getTree()));
-        System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
-        BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
-        System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
-        System.out.println("topView ? ::==> " + topViewIterative(root));
-        System.out.println("bottomViewIterative ? ::==> " + bottomViewIterative(root));
-        System.out.println("isSymmetricRecursive ? ::==> " + bts.isSymmetricRecursive(root));
-        System.out.println("isSymmetricIterative ? ::==> " + bts.isSymmetricIterative(root));
-        System.out.println("rightSideViewRecursive ? ::==> " + bts.rightSideViewRecursive(root));
-        System.out.println("rightSideViewItertaive ? ::==> " + bts.rightSideViewItertaive(root));
-        System.out.println("leftSideViewRecursive ? ::==> " + bts.leftSideViewRecursive(root));
-        System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
-        System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
-
-        System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(2), new TreeNode(3)));
-        System.out.println(
-                "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(3)));
-
-        System.out.println(" NodesAtdistanceK () ? ::==> " + NodesAtdistanceK(root, root.left.left, 1));
-        System.out.println(" NodesAtdistanceKV2 () ? ::==> " + NodesAtdistanceKV2(root, root.left.left, 1));
-        System.out.println(" NodesAtdistanceKV3 () ? ::==> " + NodesAtdistanceKV3(root, root.left.left, 1));
-        System.out.println("countNodesinCompleteBinaryTree ? ::==> " + bts.countNodesinCompleteBinaryTree(root));
-        int preorder[] = { 10, 20, 40, 50, 30, 60 };
-        int inorder[] = { 40, 20, 50, 10, 60, 30 };
-        System.out.println("buildBinaryTreefromInAndPre () ? ::==> " + buildBinaryTreefromInAndPre(inorder, preorder));
-        System.out.println("UDAY ====>");
-    }
-
-    private static void printBinaryTree(ArrayList<Integer> inOrder, String... name) {
-        System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ":  BEGIN");
-        for (int i = 0; i < inOrder.size(); i++) {
-            System.out.print(inOrder.get(i) + " ");
+    // #####
+    // https://takeuforward.org/data-structure/serialize-and-deserialize-a-binary-tree/
+    // serialize-and-deserialize-a-binary-tree
+    public String serialize(TreeNode root) {
+        if (root == null)
+            return "";
+        Queue<TreeNode> q = new LinkedList<>();
+        StringBuilder res = new StringBuilder();
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
+            if (node == null) {
+                res.append("n ");
+                continue;
+            }
+            res.append(node.val + " ");
+            q.add(node.left);
+            q.add(node.right);
         }
-        System.out.println("");
-        System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ": END ");
+        return res.toString();
     }
 
-    static TreeNode getTree() {
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(2);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(10);
-        root.left.left.right = new TreeNode(5);
-        root.left.left.right.right = new TreeNode(6);
-        root.right = new TreeNode(3);
-        root.right.left = new TreeNode(9);
-        root.right.right = new TreeNode(12);
+    public TreeNode deserialize(String data) {
+        if (data == "")
+            return null;
+        Queue<TreeNode> q = new LinkedList<>();
+        String[] values = data.split(" ");
+        TreeNode root = new TreeNode(Integer.parseInt(values[0]));
+        q.add(root);
+        for (int i = 1; i < values.length; i++) {
+            TreeNode parent = q.poll();
+            if (!values[i].equals("n")) {
+                TreeNode left = new TreeNode(Integer.parseInt(values[i]));
+                parent.left = left;
+                q.add(left);
+            }
+            if (!values[++i].equals("n")) {
+                TreeNode right = new TreeNode(Integer.parseInt(values[i]));
+                parent.right = right;
+                q.add(right);
+            }
+        }
         return root;
     }
+    // ## Morris Inorder Traversal of a Binary tree
+    // https://takeuforward.org/data-structure/morris-inorder-traversal-of-a-binary-tree/
 
-}
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> inorder = new ArrayList<Integer>();
+
+        TreeNode cur = root;
+        while (cur != null) {
+            if (cur.left == null) {
+                inorder.add(cur.val);
+                cur = cur.right;
+            } else {
+                TreeNode prev = cur.left;
+                while (prev.right != null && prev.right != cur) {
+                    prev = prev.right;
+                }
+
+                if (prev.right == null) {
+                    prev.right = cur;
+                    cur = cur.left;
+                } else {
+                    prev.right = null;
+                    inorder.add(cur.val);
+                    cur = cur.right;
+                }
+            }
+        }
+        return inorder;
+    }
+
+    // ### Morris Preorder Traversal of a Binary Tree
+    // https://takeuforward.org/data-structure/morris-preorder-traversal-of-a-binary-tree/
+    class Node {
+        int data;
+        Node left, right;
+
+        Node(int data) {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    }
+
+    static ArrayList<Integer> preorderTraversal(Node root) {
+        ArrayList<Integer> preorder = new ArrayList<>();
+        Node cur = root;
+        while (cur != null) {
+            if (cur.left == null) {
+                preorder.add(cur.data);
+                cur = cur.right;
+            } else {
+                Node prev = cur.left;
+                while (prev.right != null && prev.right != cur) {
+                    prev = prev.right;
+                }
+
+                if (prev.right == null) {
+                    prev.right = cur;
+                    preorder.add(cur.data);
+                    cur = cur.left;
+                } else {
+                    prev.right = null;
+                    cur = cur.right;
+                }
+            }
+        }
+        return preorder;
+    }
+    // https://takeuforward.org/data-structure/flatten-binary-tree-to-linked-list/
+    // Flatten Binary Tree to Linked List
+
+    public static class Solution {
+        static Node prev = null;
+
+        void flatten(Node root) {
+            if (root == null) return;
+
+            flatten(root.right);
+            flatten(root.left);
+
+            root.right = prev;
+            root.left = null;
+            prev = root;
+        }
+
+        // ############################ Plumbing Code
+        public static void main(String args[]) {
+            TreeNode root = getTree();
+
+            TreeNode root1 = new TreeNode(1);
+            root1.left = new TreeNode(2);
+            TreeNode root2 = new TreeNode(1);
+            root1.right = new TreeNode(2);
+            // ## IN-ORDER TRAVERSALS
+            ArrayList<Integer> inOrder;
+            inOrder = inOrderIterativeTraversal(root);
+            printBinaryTree(inOrder, "IN_ORDER", "ITERATIVE");
+            inOrder.clear();
+            inOrderRecursiveTraversal(root, inOrder);
+            printBinaryTree(inOrder, "IN_ORDER", "RECURSIVE");
+            // ## PRE-ORDER TRAVERSALS
+            ArrayList<Integer> preOrder = preOrderIterativeTraversal(root);
+            printBinaryTree(preOrder, "PRE_ORDER", "ITERATIVE");
+            preOrder.clear();
+            preOrderRecursiveTraversal(root, preOrder);
+            printBinaryTree(preOrder, "PRE_ORDER", "RECURSIVE");
+            // ## POST-ORDER TRAVERSALS
+            ArrayList<Integer> postOrder = new ArrayList<>();
+            postOrderRecursiveTraversal(root, postOrder);
+            printBinaryTree(postOrder, "POST_ORDER", "RECURSIVE");
+            postOrder.clear();
+            postOrder = postOrderTwoStackTraversal(root);
+            printBinaryTree(postOrder, "POST_ORDER_TWO_STACK", "RECURSIVE");
+
+            System.out.println("isBalanced ? ::==> " + isBalancedBinaryTree(root));
+            System.out.println("maxPathSum ? ::==> " + maxPathSum(root));
+
+            System.out.println("isIdenticalTreesIterative ? ::==> " + isIdenticalTreesIterative(root1, root2));
+            System.out.println("isIdenticalTreesRecursive ? ::==>" + isIdenticalTreesRecursive(root, getTree()));
+            System.out.println("zigzagLevelOrder ? ::==> " + zigzagLevelOrder(root));
+            BinaryTreeTraversalsTUF bts = new BinaryTreeTraversalsTUF();
+            System.out.println("verticalOrderTraversalIterative ? ::==> " + bts.verticalOrderTraversalIterative(root));
+            System.out.println("topView ? ::==> " + topViewIterative(root));
+            System.out.println("bottomViewIterative ? ::==> " + bottomViewIterative(root));
+            System.out.println("isSymmetricRecursive ? ::==> " + bts.isSymmetricRecursive(root));
+            System.out.println("isSymmetricIterative ? ::==> " + bts.isSymmetricIterative(root));
+            System.out.println("rightSideViewRecursive ? ::==> " + bts.rightSideViewRecursive(root));
+            System.out.println("rightSideViewItertaive ? ::==> " + bts.rightSideViewItertaive(root));
+            System.out.println("leftSideViewRecursive ? ::==> " + bts.leftSideViewRecursive(root));
+            System.out.println("leftSideViewItertaive ? ::==> " + bts.leftSideViewItertaive(root));
+            System.out.println("root2nodePath ? ::==> " + root2nodePath(root, 9));
+
+            System.out.println("LCARecursive ? ::==> " + lCARecursive(root, new TreeNode(2), new TreeNode(3)));
+            System.out.println(
+                    "getAnsforlCARecursive2 ? ::==> " + getAnsforlCARecursive2(root, new TreeNode(2), new TreeNode(3)));
+
+            System.out.println(" NodesAtdistanceK () ? ::==> " + NodesAtdistanceK(root, root.left.left, 1));
+            System.out.println(" NodesAtdistanceKV2 () ? ::==> " + NodesAtdistanceKV2(root, root.left.left, 1));
+            System.out.println(" NodesAtdistanceKV3 () ? ::==> " + NodesAtdistanceKV3(root, root.left.left, 1));
+            System.out.println("countNodesinCompleteBinaryTree ? ::==> " + bts.countNodesinCompleteBinaryTree(root));
+            int preorder[] = {10, 20, 40, 50, 30, 60};
+            int inorder[] = {40, 20, 50, 10, 60, 30};
+            System.out.println("buildBinaryTreefromInAndPre () ? ::==> " + buildBinaryTreefromInAndPre(inorder, preorder));
+            System.out.println("UDAY ====>");
+        }
+
+        private static void printBinaryTree(ArrayList<Integer> inOrder, String... name) {
+            System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ":  BEGIN");
+            for (int i = 0; i < inOrder.size(); i++) {
+                System.out.print(inOrder.get(i) + " ");
+            }
+            System.out.println("");
+            System.out.println("The " + name[0] + " Traversal with Approach " + name[1] + ": END ");
+        }
+
+        static TreeNode getTree() {
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.left.left = new TreeNode(4);
+            root.left.right = new TreeNode(10);
+            root.left.left.right = new TreeNode(5);
+            root.left.left.right.right = new TreeNode(6);
+            root.right = new TreeNode(3);
+            root.right.left = new TreeNode(9);
+            root.right.right = new TreeNode(12);
+            return root;
+        }
+
+    }}
