@@ -10,7 +10,7 @@ public class Test {
     System.out.println(sarr.length);
     StringBuilder sb = new StringBuilder();
     for (int i = sarr.length - 1; i >= 0; i--) {
-      System.out.println("sarr[i] " + sarr[i] + " sarr[i] size : " + sarr[i].size());
+      System.out.println("sarr[i] " + sarr[i] + " sarr[i] size : " + sarr[i].length());
       String tempStr = sarr[i].trim();
       System.out.println("tempStr : " + tempStr + " tempStr size : " + tempStr.length());
       sb.append(tempStr);
