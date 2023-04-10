@@ -3,6 +3,7 @@ package dsa.arrays;
 import java.util.Arrays;
 
 public class ArraysTuf {
+
     public static void main(String[] args) {
         // Longest Element in Array
         // Option 1
@@ -22,3 +23,4 @@ public class ArraysTuf {
     }
 
 }
+
