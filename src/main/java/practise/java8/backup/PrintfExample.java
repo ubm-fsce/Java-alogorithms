@@ -1,4 +1,4 @@
-package practise.java8;
+package practise.java8.backup;
 
 import java.util.Scanner;
 
