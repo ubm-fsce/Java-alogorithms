@@ -26,6 +26,7 @@ public class StreamsPractise {
                 entrySet().stream().forEach(System.out::println);
 
 
+
     }
 
     static void practise2() {
