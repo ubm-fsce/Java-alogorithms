@@ -19,14 +19,13 @@ public class BinaryTreeTraversalsTUF {
     // ############################ IN Order Traversal ############################
     static ArrayList<Integer> inOrderIterativeTraversal(TreeNode curr) {
         ArrayList<Integer> inOrder = new ArrayList<>();
+        if (curr == null) return inOrder;
         Stack<TreeNode> stack = new Stack<>();
-        while (true) {
+        while (!stack.isEmpty() || curr != null) {
             if (curr != null) {
                 stack.push(curr);
                 curr = curr.left;
             } else {
-                if (stack.isEmpty())
-                    break;
                 curr = stack.pop();
                 inOrder.add(curr.val);
                 // stack.pop();

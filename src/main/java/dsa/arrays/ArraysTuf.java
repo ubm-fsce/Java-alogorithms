@@ -16,21 +16,29 @@ import java.util.stream.Stream;
 public class ArraysTuf {
 
     public static void main(String[] args) {
-        int[] arr;
-        // System.out.println(isAnagram("anagram", "nagaram"));
-        // System.out.println(isPalindrome( "A man, a plan, a canal: Panama"));
-        // System.out.println(isValid("()"));
-        arr = new int[] { 1, 3, 2, 5, 4 };
-        int[] arr1 = new int[] { 1, 1, 2, 2, 4, 7, 7 };
-        int[] arr2 = new int[] { 1, 2, 2, 0, 0, 0 };
-        // largestElemenentInArray(arr);
-        // _2ndLargestAndSmallestElements(arr);
-        // isArraySorted(arr2);
-        // removeDuplicates(arr);
-        // leftRotateArrayBy1(arr);
-        // unionOfTwoArrays(arr, arr1);
-        // getSingleItemDoubleOccuringArray(arr1);
-        sortArrayOf012s(arr2);
+
+        for(int i = 1; i<=5; i++){
+            for(int j=1; j<=i;j++){
+                System.out.print(i);
+            }
+            System.out.println();
+        }
+
+//        int[] arr;
+//        // System.out.println(isAnagram("anagram", "nagaram"));
+//        // System.out.println(isPalindrome( "A man, a plan, a canal: Panama"));
+//        // System.out.println(isValid("()"));
+//        arr = new int[] { 1, 3, 2, 5, 4 };
+//        int[] arr1 = new int[] { 1, 1, 2, 2, 4, 7, 7 };
+//        int[] arr2 = new int[] { 1, 2, 2, 0, 0, 0 };
+//        // largestElemenentInArray(arr);
+//        // _2ndLargestAndSmallestElements(arr);
+//        // isArraySorted(arr2);
+//        // removeDuplicates(arr);
+//        // leftRotateArrayBy1(arr);
+//        // unionOfTwoArrays(arr, arr1);
+//        // getSingleItemDoubleOccuringArray(arr1);
+//        sortArrayOf012s(arr2);
     }
 
     public static void sortArrayOf012s(int arr[]) {
